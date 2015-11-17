@@ -3,7 +3,7 @@ paper-date-picker-item [![Bower version](https://badge.fury.io/bo/paper-date-pic
 
 `paper-date-picker-item` provides a Material Design item that shows a date and opens a date picker dialog on tap. The web component is built with [Polymer 1.x](https://www.polymer-project.org).
 
-This component uses [paper-date-picker](https://github.com/bendavis78/paper-date-picker).
+This component uses the component [paper-date-picker](https://github.com/bendavis78/paper-date-picker) by [Ben Davis](https://github.com/bendavis78).
 
 ![Screenshot](/doc/screenshot.png "Screenshot")
 
