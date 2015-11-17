@@ -1,0 +1,74 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../paper-item/paper-icon-item.html">
+<link rel="import" href="../paper-item/paper-item-body.html">
+<link rel="import" href="../paper-ripple/paper-ripple.html">
+<link rel="import" href="../paper-styles/paper-styles.html">
+<link rel="import" href="paper-date-picker-edit-dialog.html">
+
+<script src="../moment/min/moment-with-locales.min.js"></script>
+
+<dom-module id='paper-date-picker-item'>
+
+	<style>
+		.item {
+			/* Limit ripple */
+			position: relative;
+		}
+		
+		.icon {
+			opacity: var(--dark-disabled-opacity);
+		}
+	</style>
+
+	<template>
+		<paper-icon-item class='item' on-tap='_edit'>
+			<paper-ripple fit></paper-ripple>
+			<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
+			<paper-item-body>[[_formatDate(date)]]</paper-item-body>
+		</paper-icon-item>
+	</template>
+	
+</dom-module>
+
+<script>
+
+(function() {
+
+	Polymer({
+		is: 'paper-date-picker-item',
+		properties: {
+			date: {
+				type: Date,
+				value: new Date()
+			},
+			icon: String
+		},
+
+		// Private methods
+		_edit: function() {
+			var dialog = document.createElement('paper-date-picker-edit-dialog');
+			
+			// Wait until dialog is created before the properties can be set
+			// @see http://stackoverflow.com/a/31482376
+			this.async(function() {
+				// Initialize dialog with the current date
+				dialog.date = this.date;
+				
+				// Capture date if the user saved the dialog
+				dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
+					this.date = e.detail;
+				}.bind(this));
+				
+				dialog.open();
+			});
+		},
+		_formatDate: function(date) {
+			// Use momentjs.com library to format the date
+			return moment(date).format('ll');
+		}
+	});
+
+})();
+
+</script>
