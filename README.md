@@ -5,7 +5,7 @@ paper-date-picker-item [![Bower version](https://badge.fury.io/bo/paper-date-pic
 
 ![Screenshot](/doc/screenshot.png "Screenshot")
 
-This project uses [paper-date-picker](https://github.com/bendavis78/paper-date-picker).
+This component uses [paper-date-picker](https://github.com/bendavis78/paper-date-picker).
 
 
 ## Usage
