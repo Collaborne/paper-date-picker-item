@@ -30,7 +30,7 @@
     "paper-styles": "PolymerElements/paper-styles#^1.0.0",
     "neon-animation": "PolymerElements/neon-animation#^1.0.0",
 	"paper-date-picker": "bendavis78/paper-date-picker#1.1.0",
-    "moment": "~2.8.3"
+    "moment": "^2.8.3"
   },
   "devDependencies": {
     "iron-test-helpers": "polymerelements/iron-test-helpers#^1.0.0",
