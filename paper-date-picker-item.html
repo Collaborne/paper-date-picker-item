@@ -19,13 +19,17 @@
 		.icon {
 			opacity: var(--dark-disabled-opacity);
 		}
+		
+		.item[has-no-date] .text {
+			color: var(--secondary-text-color);
+		}
 	</style>
 
 	<template>
-		<paper-icon-item class='item' on-tap='_edit'>
+		<paper-icon-item class='item' on-tap='_edit' has-no-date$=[[!_hasDate]]>
 			<paper-ripple fit></paper-ripple>
 			<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
-			<paper-item-body>[[_formatDate(date)]]</paper-item-body>
+			<paper-item-body class='text'>[[_showDate]]</paper-item-body>
 		</paper-icon-item>
 	</template>
 	
@@ -40,7 +44,18 @@
 		properties: {
 			date: {
 				type: Date,
-				value: new Date()
+				value: new Date(),
+				notify: true
+			},
+			_showDate: {
+				type: String,
+				computed: '_computeShowDate(date)',
+				value: 'Add a date'
+			},
+			_hasDate: {
+				type: Boolean,
+				computed: '_computeHasDate(date)',
+				value: false
 			},
 			icon: String
 		},
@@ -52,8 +67,8 @@
 			// Wait until dialog is created before the properties can be set
 			// @see http://stackoverflow.com/a/31482376
 			this.async(function() {
-				// Initialize dialog with the current date
-				dialog.date = this._dateOrDefaultToToday(this.date);
+				// Initialize dialog with the current date (default to today to avoid exception)
+				dialog.date = this._hasDate ? this.date : new Date();
 				
 				// Capture date if the user saved the dialog
 				dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
@@ -63,12 +78,12 @@
 				dialog.open();
 			});
 		},
-		_formatDate: function(date) {
+		_computeShowDate: function(date) {
 			// Use momentjs.com library to format the date
 			return moment(date).format('ll');
 		},
-		_dateOrDefaultToToday: function(date) {
-			return typeof date !== 'undefined' && date !== null ? date : new Date();
+		_computeHasDate: function(date) {
+			return typeof date !== 'undefined' && date !== null;
 		}
 	});
 
