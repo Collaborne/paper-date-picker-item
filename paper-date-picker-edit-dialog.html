@@ -26,8 +26,10 @@
 	Polymer({
 		is: 'paper-date-picker-edit-dialog',
 		properties: {
-			date: Date,
-			notify: true
+			date: {
+				type: Date,
+				notify: true
+			}
 		},
 
 		// Public methods
