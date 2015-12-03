@@ -23,6 +23,24 @@
 	
 		<script>
 			suite('<paper-date-picker-item>', function() {
+				suite('standard behavior', function() {
+					var element;
+	
+					setup(function() {
+						element = fixture('TrivialEmailElement');
+					});
+					
+					test('detects if date is set', function() {
+						expect(element._computeHasDate(new Date(2015, 10, 17, 0, 0, 0, 0))).to.be.eql(true);
+					});
+					test('detects if date is null', function() {
+						expect(element._computeHasDate(null)).to.be.eql(false);
+					});
+					test('detects if date is undefined', function() {
+						expect(element._computeHasDate(undefined)).to.be.eql(false);
+					});
+				});
+
 				suite('format behavior', function() {
 					var element;
 	
@@ -31,7 +49,7 @@
 					});
 					
 					test('formats the date', function() {
-						expect(element._formatDate(new Date(2015, 10, 17, 0, 0, 0, 0))).to.be.eql('Nov 17, 2015');
+						expect(element._computeShowDate(new Date(2015, 10, 17, 0, 0, 0, 0))).to.be.eql('Nov 17, 2015');
 					});
 				});
 			});
