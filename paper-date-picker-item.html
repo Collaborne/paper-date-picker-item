@@ -40,8 +40,7 @@
 		properties: {
 			date: {
 				type: Date,
-				value: new Date(),
-				notify: true
+				value: new Date()
 			},
 			icon: String
 		},
@@ -54,7 +53,7 @@
 			// @see http://stackoverflow.com/a/31482376
 			this.async(function() {
 				// Initialize dialog with the current date
-				dialog.date = this.date;
+				dialog.date = this._dateOrDefaultToToday(this.date);
 				
 				// Capture date if the user saved the dialog
 				dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
@@ -67,6 +66,9 @@
 		_formatDate: function(date) {
 			// Use momentjs.com library to format the date
 			return moment(date).format('ll');
+		},
+		_dateOrDefaultToToday: function(date) {
+			return typeof date !== 'undefined' && date !== null ? date : new Date();
 		}
 	});
 
