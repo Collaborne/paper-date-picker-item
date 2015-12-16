@@ -1,4 +1,4 @@
-paper-date-picker-item [![Bower version](https://badge.fury.io/bo/paper-date-picker-item.svg)](http://badge.fury.io/bo/paper-date-picker-item)
+paper-date-picker-item [![Bower version](https://badge.fury.io/bo/paper-date-picker-item.svg)](http://badge.fury.io/bo/paper-date-picker-item) [![Travis state](https://travis-ci.org/Collaborne/paper-date-picker-item.svg?branch=master)](https://travis-ci.org/Collaborne/paper-date-picker-item)
 =========
 
 `paper-date-picker-item` provides a Material Design item that shows a date and opens a date picker dialog on tap. The web component is built with [Polymer 1.x](https://www.polymer-project.org).
@@ -25,11 +25,6 @@ Property   | Type   | Description
 ---------- | ------ | ----------------------------
 **icon**   | String | Icon shown left of the date
 **date**   | Date   | Date reflected by the component
-
-
-## Continuous integration
-
-[Travis-CI](https://travis-ci.org/Collaborne/paper-date-picker-item) [![Travis state](https://travis-ci.org/Collaborne/paper-date-picker-item.svg?branch=master)](https://travis-ci.org/Collaborne/paper-date-picker-item)
 
 
 ## License
