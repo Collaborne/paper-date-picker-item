@@ -1,0 +1,144 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../paper-item/paper-icon-item.html">
+<link rel="import" href="../paper-item/paper-item-body.html">
+<link rel="import" href="../paper-ripple/paper-ripple.html">
+<link rel="import" href="../paper-styles/paper-styles.html">
+<link rel="import" href="paper-date-picker-edit-dialog.html">
+<link rel="import" href="paper-time-picker-edit-dialog.html">
+
+<script src="../moment/min/moment-with-locales.min.js"></script>
+
+<dom-module id='paper-datetime-picker-item'>
+
+	<style>
+		.item {
+			/* Limit ripple */
+			position: relative;
+		}
+		
+		.icon {
+			color: var(--disabled-text-color);
+		}
+		
+		.item[has-no-date] .text {
+			color: var(--secondary-text-color);
+		}
+	</style>
+
+	<template>
+		<paper-icon-item class='item' on-tap='_edit' has-no-date$=[[!_hasDate]]>
+			<paper-ripple fit></paper-ripple>
+			<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
+			<paper-item-body class='text'>[[_showDate]]</paper-item-body>
+		</paper-icon-item>
+		<paper-icon-item class='item' on-tap='_editTime' has-no-date$=[[!_hasDate]]>
+			<paper-ripple fit></paper-ripple>
+			<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
+			<paper-item-body class='text'>[[_showTime]]</paper-item-body>
+		</paper-icon-item>
+	</template>
+	
+</dom-module>
+
+<script>
+
+(function() {
+
+	Polymer({
+		is: 'paper-datetime-picker-item',
+		properties: {
+			date: {
+				type: Date,
+				value: new Date(),
+				notify: true
+			},
+			time: {
+			  type: String,
+			  computed: '_extractTime(date)',
+			  notify: true
+			},
+			_showDate: {
+				type: String,
+				computed: '_computeShowDate(date)',
+				value: 'Add a date'
+			},
+			_showTime: {
+				type: String,
+				computed: '_computeShowTime(date)',
+				value: 'Add a time'
+			},
+			_hasDate: {
+				type: Boolean,
+				computed: '_computeHasDate(date)',
+				value: false
+			},
+			icon: String
+		},
+
+		// Private methods
+		_edit: function() {
+			var dialog = document.createElement('paper-date-picker-edit-dialog');
+			
+			// Wait until dialog is created before the properties can be set
+			// @see http://stackoverflow.com/a/31482376
+			this.async(function() {
+				// Initialize dialog with the current date (default to today to avoid exception)
+				dialog.date = this._hasDate ? this.date : new Date();
+				
+				// Capture date if the user saved the dialog
+				dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
+					this.date = e.detail;
+					
+					// Inform listener of "change" events when the date was changed
+					this.fire('change', { value: this.date });
+				}.bind(this));
+				
+				dialog.open();
+			});
+		},
+		_computeShowDate: function(date) {
+			// Use momentjs.com library to format the date
+			return moment(date).format('ll');
+		},
+		_computeHasDate: function(date) {
+			return typeof date !== 'undefined' && date !== null;
+		},
+		
+		// Time related private methods
+		_computeShowTime: function(date) {
+		  var time = moment(date).format("hh:mm A");
+		  alert(time);
+		  return time;
+		},
+		_extractTime: function(date) {
+		  var time = moment(date).format("hh:mm A");
+		  alert(time);
+		  return time;
+		},
+		_editTime: function() {
+		  var dialog = document.createElement('paper-time-picker-edit-dialog');
+		  // Wait until dialog is created before the properties can be set
+			// @see http://stackoverflow.com/a/31482376
+			this.async(function() {
+				// Initialize dialog with the current date (default to today to avoid exception)
+				alert("Time is " + this.time);
+				dialog.time = this.time;
+				
+				// Capture date if the user saved the dialog
+				dialog.addEventListener('paper-time-picker-edit-dialog-save', function(e) {
+				  alert(e.detail);
+					//this.date = e.detail;
+					
+					// Inform listener of "change" events when the date was changed
+					//this.fire('change', { value: this.date });
+				}.bind(this));
+				
+				dialog.open();
+			});
+		}
+	});
+
+})();
+
+</script>
