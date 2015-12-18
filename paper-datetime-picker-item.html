@@ -31,16 +31,16 @@
 	<template>
 		<div>
 			<paper-icon-item class='item' on-tap='_edit' has-no-date$=[[!_hasDate]]>
-			<paper-ripple fit></paper-ripple>
-			<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
-			<paper-item-body class='text'>[[_showDate]]</paper-item-body>
-		</paper-icon-item>
+				<paper-ripple fit></paper-ripple>
+				<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
+				<paper-item-body class='text'>[[_showDate]]</paper-item-body>
+			</paper-icon-item>
 
-		<paper-icon-item class='item' on-tap='_editTime' has-no-date$=[[!_hasDate]]>
-			<paper-ripple fit></paper-ripple>
-			<iron-icon item-icon class='icon'></iron-icon>
-			<paper-item-body class='text'>[[_showTime]]</paper-item-body>
-		</paper-icon-item>
+			<paper-icon-item class='item' on-tap='_editTime' has-no-date$=[[!_hasDate]]>
+				<paper-ripple fit></paper-ripple>
+				<iron-icon item-icon class='icon'></iron-icon>
+				<paper-item-body class='text'>[[_showTime]]</paper-item-body>
+			</paper-icon-item>
 		</div>
 	</template>
 
