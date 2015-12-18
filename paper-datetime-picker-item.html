@@ -17,33 +17,33 @@
 			position: relative;
 			@apply(--layout-inline);
 		}
-		
+
 		.icon {
 			color: var(--disabled-text-color);
 		}
-		
+
 		.item[has-no-date] .text {
 			color: var(--secondary-text-color);
 		}
-		
+
 	</style>
 
 	<template>
-	  <div>
-      <paper-icon-item class='item' on-tap='_edit' has-no-date$=[[!_hasDate]]>
-  			<paper-ripple fit></paper-ripple>
-  			<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
-  			<paper-item-body class='text'>[[_showDate]]</paper-item-body>
-  		</paper-icon-item>
-  		
-  		<paper-icon-item class='item' on-tap='_editTime' has-no-date$=[[!_hasDate]]>
-  			<paper-ripple fit></paper-ripple>
-  			<iron-icon item-icon class='icon'></iron-icon>
-  			<paper-item-body class='text'>[[_showTime]]</paper-item-body>
-  		</paper-icon-item>
+		<div>
+			<paper-icon-item class='item' on-tap='_edit' has-no-date$=[[!_hasDate]]>
+			<paper-ripple fit></paper-ripple>
+			<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
+			<paper-item-body class='text'>[[_showDate]]</paper-item-body>
+		</paper-icon-item>
+
+		<paper-icon-item class='item' on-tap='_editTime' has-no-date$=[[!_hasDate]]>
+			<paper-ripple fit></paper-ripple>
+			<iron-icon item-icon class='icon'></iron-icon>
+			<paper-item-body class='text'>[[_showTime]]</paper-item-body>
+		</paper-icon-item>
 		</div>
 	</template>
-	
+
 </dom-module>
 
 <script>
@@ -59,7 +59,7 @@
 				notify: true
 			},
 			timeZoneOffset: {
-			  type: String,
+				type: String,
 				computed: '_computeTimeZoneOffset(date)',
 			},
 			_showDate: {
@@ -73,7 +73,7 @@
 				value: 'Add a time'
 			},
 			_time: {
-			  type: Object
+				type: Object
 			},
 			_hasDate: {
 				type: Boolean,
@@ -86,27 +86,27 @@
 		// Private methods
 		_edit: function() {
 			var dialog = document.createElement('paper-date-picker-edit-dialog');
-			
+
 			// Wait until dialog is created before the properties can be set
 			// @see http://stackoverflow.com/a/31482376
 			this.async(function() {
 				// Initialize dialog with the current date (default to today to avoid exception)
 				dialog.date = this._hasDate ? this.date : new Date();
-				
+
 				// Capture date if the user saved the dialog
 				dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
-				  var newDate = e.detail;
-				  
-				  // If there is already a time picked, don't change it
-				  if (typeof this.time !== 'undefined' && this.time !== null) {
-				    newDate.setHours(this.time.hour, this.time.minute);
-				  }
+					var newDate = e.detail;
+
+					// If there is already a time picked, don't change it
+					if (typeof this.time !== 'undefined' && this.time !== null) {
+						newDate.setHours(this.time.hour, this.time.minute);
+					}
 					this.date = newDate;
-					
+
 					// Inform listener of "change" events when the date was changed
 					this.fire('change', { value: this.date });
 				}.bind(this));
-				
+
 				dialog.open();
 			});
 		},
@@ -117,39 +117,39 @@
 		_computeHasDate: function(date) {
 			return typeof date !== 'undefined' && date !== null;
 		},
-		
+
 		// Time related private methods
 		_computeShowTime: function(date) {
-		  return moment(date).format("hh:mm A");
+			return moment(date).format("hh:mm A");
 		},
 		_onDateChanged: function() {
-		  this._showTime = this._computeShowTime(this.date);
+			this._showTime = this._computeShowTime(this.date);
 		},
 		_editTime: function() {
-		  var dialog = document.createElement('paper-time-picker-edit-dialog');
-		  // Wait until dialog is created before the properties can be set
+			var dialog = document.createElement('paper-time-picker-edit-dialog');
+			// Wait until dialog is created before the properties can be set
 			// @see http://stackoverflow.com/a/31482376
 			this.async(function() {
 				// Initialize dialog with the current time
 				dialog.time = this._showTime;
-				
+
 				// Capture date if the user saved the dialog
 				dialog.addEventListener('paper-time-picker-edit-dialog-save', function(e) {
-				  // time object containing hour, minute and formatted 'HH:mm A' string
-				  this.time = e.detail;
-				  this.date.setHours(this.time.hour, this.time.minute);
-				  
-				  //TODO: propagate the change to the _showTime field to display the new time
-				  //this._showTime = this.time.formatted
-					
+					// time object containing hour, minute and formatted 'HH:mm A' string
+					this.time = e.detail;
+					this.date.setHours(this.time.hour, this.time.minute);
+
+					//TODO: propagate the change to the _showTime field to display the new time
+					//this._showTime = this.time.formatted
+
 					// Inform listener of "change" events when the date was changed
 					this.fire('change', { value: this.date });
 				}.bind(this));
-				
+
 				dialog.open();
 			});
 		},
-		
+
 		// Timezone handling
 		_computeTimeZoneOffset: function(date) {
 			// Use momentjs.com library to obtain the timezone in +0100 format
