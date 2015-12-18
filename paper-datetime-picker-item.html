@@ -24,17 +24,24 @@
 		.item[has-no-date] .text {
 			color: var(--secondary-text-color);
 		}
+		
+		.container {
+      @apply(--layout-wrap);
+      @apply(--layout-center-center);
+      @apply(--layout-inline);
+    }
 	</style>
 
 	<template>
-		<paper-icon-item class='item' on-tap='_edit' has-no-date$=[[!_hasDate]]>
+    <paper-icon-item class='item container' on-tap='_edit' has-no-date$=[[!_hasDate]]>
 			<paper-ripple fit></paper-ripple>
 			<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
 			<paper-item-body class='text'>[[_showDate]]</paper-item-body>
 		</paper-icon-item>
-		<paper-icon-item class='item' on-tap='_editTime' has-no-date$=[[!_hasDate]]>
+		
+		<paper-icon-item class='item container' on-tap='_editTime'>
 			<paper-ripple fit></paper-ripple>
-			<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
+			<iron-icon item-icon class='icon'></iron-icon>
 			<paper-item-body class='text'>[[_showTime]]</paper-item-body>
 		</paper-icon-item>
 	</template>
@@ -53,10 +60,9 @@
 				value: new Date(),
 				notify: true
 			},
-			time: {
+			timeZoneOffset: {
 			  type: String,
-			  computed: '_extractTime(date)',
-			  notify: true
+				computed: '_computeTimeZoneOffset(date)',
 			},
 			_showDate: {
 				type: String,
@@ -67,6 +73,9 @@
 				type: String,
 				computed: '_computeShowTime(date)',
 				value: 'Add a time'
+			},
+			_time: {
+			  type: Object
 			},
 			_hasDate: {
 				type: Boolean,
@@ -88,7 +97,13 @@
 				
 				// Capture date if the user saved the dialog
 				dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
-					this.date = e.detail;
+				  var newDate = e.detail;
+				  
+				  // If there is already a time picked, don't change it
+				  if (typeof this.time !== 'undefined' && this.time !== null) {
+				    newDate.setHours(this.time.hour, this.time.minute);
+				  }
+					this.date = newDate;
 					
 					// Inform listener of "change" events when the date was changed
 					this.fire('change', { value: this.date });
@@ -107,36 +122,41 @@
 		
 		// Time related private methods
 		_computeShowTime: function(date) {
-		  var time = moment(date).format("hh:mm A");
-		  alert(time);
-		  return time;
+		  return moment(date).format("hh:mm A");
 		},
-		_extractTime: function(date) {
-		  var time = moment(date).format("hh:mm A");
-		  alert(time);
-		  return time;
+		_onDateChanged: function() {
+		  this._showTime = this._computeShowTime(this.date);
 		},
 		_editTime: function() {
 		  var dialog = document.createElement('paper-time-picker-edit-dialog');
 		  // Wait until dialog is created before the properties can be set
 			// @see http://stackoverflow.com/a/31482376
 			this.async(function() {
-				// Initialize dialog with the current date (default to today to avoid exception)
-				alert("Time is " + this.time);
-				dialog.time = this.time;
+				// Initialize dialog with the current time
+				dialog.time = this._showTime;
 				
 				// Capture date if the user saved the dialog
 				dialog.addEventListener('paper-time-picker-edit-dialog-save', function(e) {
-				  alert(e.detail);
-					//this.date = e.detail;
+				  // time object containing hour, minute and formatted 'HH:mm A' string
+				  this.time = e.detail;
+				  this.date.setHours(this.time.hour, this.time.minute);
+				  
+				  //TODO: propagate the change to the _showTime field to display the new time
+				  //this._showTime = this.time.formatted
 					
 					// Inform listener of "change" events when the date was changed
-					//this.fire('change', { value: this.date });
+					this.fire('change', { value: this.date });
 				}.bind(this));
 				
 				dialog.open();
 			});
-		}
+		},
+		
+		// Timezone handling
+		_computeTimeZoneOffset: function(date) {
+			// Use momentjs.com library to obtain the timezone in +0100 format
+			return moment.parseZone(date).format('ZZ');
+		},
 	});
 
 })();

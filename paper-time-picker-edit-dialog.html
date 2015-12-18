@@ -46,8 +46,12 @@
 			this.$.dialog.open();
 		},
 		close: function() {
+		  var time = {};
+		  time.hour = this.$.timePicker.hour;
+		  time.minute = this.$.timePicker.minute;
+		  time.formatted = this.$.timePicker.time;
 			// Inform listeners that the user confirmed the selected date
-			this.fire('paper-time-picker-edit-dialog-save', this.time);
+			this.fire('paper-time-picker-edit-dialog-save', time);
 		},
 
 		// Private methods
