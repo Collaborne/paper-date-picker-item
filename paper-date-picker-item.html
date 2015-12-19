@@ -24,7 +24,7 @@
 		<paper-icon-item class='item' on-tap='_edit' has-no-date$=[[!_hasDate]]>
 			<paper-ripple fit></paper-ripple>
 			<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
-			<paper-item-body class='text'>[[_showDate]]</paper-item-body>
+			<paper-item-body class='text'>[[_getPrettyDate(date,_hasDate)]]</paper-item-body>
 		</paper-icon-item>
 	</template>
 
@@ -42,17 +42,13 @@
 				value: new Date(),
 				notify: true
 			},
-			_showDate: {
-				type: String,
-				computed: '_computeShowDate(date)',
-				value: 'Add a date'
-			},
+			icon: String,
+
 			_hasDate: {
 				type: Boolean,
 				computed: '_computeHasDate(date)',
 				value: false
-			},
-			icon: String
+			}
 		},
 
 		// Private methods
@@ -76,7 +72,11 @@
 				dialog.open();
 			});
 		},
-		_computeShowDate: function(date) {
+		_getPrettyDate: function(date,_hasDate) {
+			if (!_hasDate) {
+				return 'Add a date';
+			}
+
 			// Use momentjs.com library to format the date
 			return moment(date).format('ll');
 		},
