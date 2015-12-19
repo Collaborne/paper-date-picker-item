@@ -14,16 +14,16 @@
 				margin: 0;
 			}
 		</style>
-		
-    <paper-dialog id="dialog" class="paper-time-picker-dialog dialog" modal entry-animation='fade-in-animation' exit-animation='fade-out-animation' on-iron-overlay-closed='_onClosed'>
-      <paper-time-picker id="timePicker" time="{{time}}"></paper-time-picker>
-      <div class="buttons">
-        <paper-button dialog-dismiss>Cancel</paper-button>
-        <paper-button dialog-confirm on-tap='close'>OK</paper-button>
-      </div>
-    </paper-dialog>
+
+		<paper-dialog id="dialog" class="paper-time-picker-dialog dialog" modal entry-animation='fade-in-animation' exit-animation='fade-out-animation' on-iron-overlay-closed='_onClosed'>
+			<paper-time-picker id="timePicker" time="{{time}}"></paper-time-picker>
+			<div class="buttons">
+				<paper-button dialog-dismiss>Cancel</paper-button>
+				<paper-button dialog-confirm on-tap='close'>OK</paper-button>
+			</div>
+		</paper-dialog>
 	</template>
-	
+
 </dom-module>
 
 <script>
@@ -46,10 +46,10 @@
 			this.$.dialog.open();
 		},
 		close: function() {
-		  var time = {};
-		  time.hour = this.$.timePicker.hour;
-		  time.minute = this.$.timePicker.minute;
-		  time.formatted = this.$.timePicker.time;
+		 	var time = {};
+			time.hour = this.$.timePicker.hour;
+			time.minute = this.$.timePicker.minute;
+			time.formatted = this.$.timePicker.time;
 			// Inform listeners that the user confirmed the selected date
 			this.fire('paper-time-picker-edit-dialog-save', time);
 		},
