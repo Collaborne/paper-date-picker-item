@@ -1,12 +1,12 @@
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-icon/iron-icon.html">
-<link rel="import" href="../paper-item/paper-icon-item.html">
-<link rel="import" href="../paper-item/paper-item-body.html">
-<link rel="import" href="../paper-ripple/paper-ripple.html">
-<link rel="import" href="../paper-styles/paper-styles.html">
-<link rel="import" href="paper-date-picker-edit-dialog.html">
+<link rel='import' href='../polymer/polymer.html'>
+<link rel='import' href='../iron-icon/iron-icon.html'>
+<link rel='import' href='../paper-item/paper-icon-item.html'>
+<link rel='import' href='../paper-item/paper-item-body.html'>
+<link rel='import' href='../paper-ripple/paper-ripple.html'>
+<link rel='import' href='../paper-styles/paper-styles.html'>
+<link rel='import' href='paper-date-picker-edit-dialog.html'>
 
-<script src="../moment/min/moment-with-locales.min.js"></script>
+<script src='../moment/min/moment-with-locales.min.js'></script>
 
 <dom-module id='paper-date-picker-item'>
 
@@ -15,11 +15,11 @@
 			/* Limit ripple */
 			position: relative;
 		}
-		
+
 		.icon {
 			color: var(--disabled-text-color);
 		}
-		
+
 		.item[has-no-date] .text {
 			color: var(--secondary-text-color);
 		}
@@ -32,7 +32,7 @@
 			<paper-item-body class='text'>[[_showDate]]</paper-item-body>
 		</paper-icon-item>
 	</template>
-	
+
 </dom-module>
 
 <script>
@@ -63,21 +63,21 @@
 		// Private methods
 		_edit: function() {
 			var dialog = document.createElement('paper-date-picker-edit-dialog');
-			
+
 			// Wait until dialog is created before the properties can be set
 			// @see http://stackoverflow.com/a/31482376
 			this.async(function() {
 				// Initialize dialog with the current date (default to today to avoid exception)
 				dialog.date = this._hasDate ? this.date : new Date();
-				
+
 				// Capture date if the user saved the dialog
 				dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
 					this.date = e.detail;
-					
+
 					// Inform listener of "change" events when the date was changed
 					this.fire('change', { value: this.date });
 				}.bind(this));
-				
+
 				dialog.open();
 			});
 		},
