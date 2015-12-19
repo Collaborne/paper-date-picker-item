@@ -27,12 +27,12 @@
 	</style>
 
 	<template>
-		<paper-icon-item on-tap='_edit'>
+		<paper-icon-item on-tap='_edit' class='flex'>
 			<paper-ripple fit></paper-ripple>
 			<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
 			<paper-item-body class='text'>[[_getPrettyDate(date)]]</paper-item-body>
 		</paper-icon-item>
-		<paper-item class='flex' on-tap='_editTime'>
+		<paper-item class='flex' on-tap='_editTime' hidden=[[!date]]>
 			<paper-ripple fit></paper-ripple>
 			[[_showTime]]
 		</paper-item>
