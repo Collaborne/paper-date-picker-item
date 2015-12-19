@@ -72,9 +72,6 @@
 				computed: '_computeShowTime(date)',
 				value: 'Add a time'
 			},
-			_time: {
-				type: Object
-			},
 			_hasDate: {
 				type: Boolean,
 				computed: '_computeHasDate(date)',
@@ -133,8 +130,8 @@
 				// Capture date if the user saved the dialog
 				dialog.addEventListener('paper-time-picker-edit-dialog-save', function(e) {
 					// time object containing hour, minute and formatted 'HH:mm A' string
-					this.time = e.detail;
-					this.date.setHours(this.time.hour, this.time.minute);
+					var time = e.detail;
+					this.date.setHours(time.hour, time.minute);
 
 					//TODO: propagate the change to the _showTime field to display the new time
 					//this._showTime = this.time.formatted
@@ -144,7 +141,7 @@
 				}.bind(this));
 
 				dialog.open();
-			});
+			}.bind(this));
 		},
 
 		// Timezone handling
