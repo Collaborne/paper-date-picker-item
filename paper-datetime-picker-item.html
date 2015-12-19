@@ -1,6 +1,7 @@
 <link rel='import' href='../polymer/polymer.html'>
 <link rel='import' href='../iron-icon/iron-icon.html'>
 <link rel='import' href='../paper-item/paper-icon-item.html'>
+<link rel='import' href='../paper-item/paper-item.html'>
 <link rel='import' href='../paper-item/paper-item-body.html'>
 <link rel='import' href='../paper-ripple/paper-ripple.html'>
 <link rel='import' href='../paper-styles/paper-styles.html'>
@@ -13,9 +14,7 @@
 
 	<style>
 		.item {
-			/* Limit ripple */
-			position: relative;
-			@apply(--layout-inline);
+			@apply(--layout-horizontal);
 		}
 
 		.icon {
@@ -29,18 +28,16 @@
 	</style>
 
 	<template>
-		<div>
-			<paper-icon-item class='item' on-tap='_edit' has-no-date$=[[!_hasDate]]>
+		<div class='item'>
+			<paper-icon-item on-tap='_edit' has-no-date$=[[!_hasDate]]>
 				<paper-ripple fit></paper-ripple>
 				<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
 				<paper-item-body class='text'>[[_showDate]]</paper-item-body>
 			</paper-icon-item>
-
-			<paper-icon-item class='item' on-tap='_editTime' has-no-date$=[[!_hasDate]]>
+			<paper-item class='flex' on-tap='_editTime' has-no-date$=[[!_hasDate]]>
 				<paper-ripple fit></paper-ripple>
-				<iron-icon item-icon class='icon'></iron-icon>
-				<paper-item-body class='text'>[[_showTime]]</paper-item-body>
-			</paper-icon-item>
+				[[_showTime]]
+			</paper-item>
 		</div>
 	</template>
 
