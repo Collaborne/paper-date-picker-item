@@ -122,9 +122,6 @@
 		_computeShowTime: function(date) {
 			return moment(date).format("hh:mm A");
 		},
-		_onDateChanged: function() {
-			this._showTime = this._computeShowTime(this.date);
-		},
 		_editTime: function() {
 			var dialog = document.createElement('paper-time-picker-edit-dialog');
 			// Wait until dialog is created before the properties can be set
