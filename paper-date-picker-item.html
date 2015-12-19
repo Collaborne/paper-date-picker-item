@@ -64,7 +64,10 @@
 				}.bind(this));
 
 				dialog.open();
-			});
+			}.bind(this));
+
+			// Return dialog for unit testing
+			return dialog;
 		},
 		_getPrettyDate: function(date) {
 			if (!date) {

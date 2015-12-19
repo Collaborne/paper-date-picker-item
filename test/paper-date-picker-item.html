@@ -4,56 +4,100 @@
 		<title>paper-date-picker-item</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		
+
 		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 		<script src="../../web-component-tester/browser.js"></script>
 		<script src="../../test-fixture/test-fixture-mocha.js"></script>
 		<script src="../../iron-test-helpers/mock-interactions.js"></script>
-		
+
 		<link rel="import" href="../paper-date-picker-item.html">
 		<link rel="import" href="../../test-fixture/test-fixture.html">
 	</head>
 	<body>
-	
+
 		<test-fixture id="TrivialEmailElement">
 			<template>
 				<paper-date-picker-item></paper-date-picker-item>
 			</template>
 		</test-fixture>
-	
+
 		<script>
 			suite('<paper-date-picker-item>', function() {
-				suite('standard behavior', function() {
+				suite('dialog integration behavior', function() {
 					var element;
-	
+
 					setup(function() {
 						element = fixture('TrivialEmailElement');
 					});
-					
-					test('detects if date is set', function() {
-						expect(element._computeHasDate(new Date(2015, 10, 17, 0, 0, 0, 0))).to.be.eql(true);
+
+					test('passes date to edit dialog', function(done) {
+						element.date = new Date(2015, 10, 17, 0, 0, 0, 0);
+						var dialog = element._edit();
+
+						setTimeout(function() {
+							expect(dialog.date).to.be.eql(element.date);
+							done();
+						});
 					});
-					test('detects if date is null', function() {
-						expect(element._computeHasDate(null)).to.be.eql(false);
+					test('defaults date in edit dialog to now if no date is set', function(done) {
+						// Pre-condition: date is not set
+						expect(element.date).to.be.eql(null);
+
+						var dialog = element._edit();
+
+						setTimeout(function() {
+							expect(dialog.date).to.be.not.eql(null);
+							done();
+						});
 					});
-					test('detects if date is undefined', function() {
-						expect(element._computeHasDate(undefined)).to.be.eql(false);
+					test('captures date set in edit dialog', function(done) {
+						// Pre-condition: date is not set
+						expect(element.date).to.be.eql(null);
+
+						var dialog = element._edit();
+						setTimeout(function() {
+							dialog.date = new Date(2015, 10, 17, 0, 0, 0, 0);
+							dialog.save();
+
+							expect(element.date).to.be.eql(dialog.date);
+							done();
+						});
+					});
+					test('fires change event if date was set in edit dialog', function(done) {
+						var expectedDate = new Date(2015, 10, 17, 0, 0, 0, 0);
+
+						element.addEventListener('change', function(e) {
+							expect(e.detail.value).to.be.eql(expectedDate);
+							done();
+						});
+
+						var dialog = element._edit();
+						setTimeout(function() {
+							dialog.date = expectedDate;
+							dialog.save();
+						});
 					});
 				});
 
-				suite('format behavior', function() {
+				suite('format date behavior', function() {
 					var element;
-	
+
 					setup(function() {
 						element = fixture('TrivialEmailElement');
 					});
-					
+
 					test('formats the date', function() {
-						expect(element._computeShowDate(new Date(2015, 10, 17, 0, 0, 0, 0))).to.be.eql('Nov 17, 2015');
+						expect(element._getPrettyDate(new Date(2015, 10, 17, 0, 0, 0, 0))).to.be.eql('Nov 17, 2015');
+					});
+					test('return placeholder if date is undefined', function() {
+						expect(element._getPrettyDate(undefined)).to.be.eql('Add a date');
+					});
+					test('return placeholder if date is null', function() {
+						expect(element._getPrettyDate(null)).to.be.eql('Add a date');
 					});
 				});
 			});
 		</script>
-	
+
 	</body>
 </html>
