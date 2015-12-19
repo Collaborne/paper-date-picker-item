@@ -21,10 +21,10 @@
 	</style>
 
 	<template>
-		<paper-icon-item class='item' on-tap='_edit' has-no-date$=[[!_hasDate]]>
+		<paper-icon-item class='item' on-tap='_edit' has-no-date$=[[!date]]>
 			<paper-ripple fit></paper-ripple>
 			<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
-			<paper-item-body class='text'>[[_getPrettyDate(date,_hasDate)]]</paper-item-body>
+			<paper-item-body class='text'>[[_getPrettyDate(date)]]</paper-item-body>
 		</paper-icon-item>
 	</template>
 
@@ -39,16 +39,10 @@
 		properties: {
 			date: {
 				type: Date,
-				value: new Date(),
+				value: null,
 				notify: true
 			},
-			icon: String,
-
-			_hasDate: {
-				type: Boolean,
-				computed: '_computeHasDate(date)',
-				value: false
-			}
+			icon: String
 		},
 
 		// Private methods
@@ -72,16 +66,13 @@
 				dialog.open();
 			});
 		},
-		_getPrettyDate: function(date,_hasDate) {
-			if (!_hasDate) {
+		_getPrettyDate: function(date) {
+			if (!date) {
 				return 'Add a date';
 			}
 
 			// Use momentjs.com library to format the date
 			return moment(date).format('ll');
-		},
-		_computeHasDate: function(date) {
-			return typeof date !== 'undefined' && date !== null;
 		}
 	});
 
