@@ -21,18 +21,18 @@
 			color: var(--disabled-text-color);
 		}
 
-		.item[has-no-date] .text {
+		:host[has-no-date] .text {
 			color: var(--secondary-text-color);
 		}
 	</style>
 
 	<template>
-		<paper-icon-item on-tap='_edit' has-no-date$=[[!_hasDate]]>
+		<paper-icon-item on-tap='_edit'>
 			<paper-ripple fit></paper-ripple>
 			<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
-			<paper-item-body class='text'>[[_showDate]]</paper-item-body>
+			<paper-item-body class='text'>[[_getPrettyDate(date)]]</paper-item-body>
 		</paper-icon-item>
-		<paper-item class='flex' on-tap='_editTime' has-no-date$=[[!_hasDate]]>
+		<paper-item class='flex' on-tap='_editTime'>
 			<paper-ripple fit></paper-ripple>
 			[[_showTime]]
 		</paper-item>
@@ -49,29 +49,24 @@
 		properties: {
 			date: {
 				type: Date,
-				value: new Date(),
+				value: null,
 				notify: true
 			},
 			timeZoneOffset: {
 				type: String,
 				computed: '_computeTimeZoneOffset(date)',
 			},
-			_showDate: {
-				type: String,
-				computed: '_computeShowDate(date)',
-				value: 'Add a date'
+			icon: String,
+
+			hasNoDate: {
+				type: Boolean,
+				computed: '_computeHasNoDate(date)',
+				reflectToAttribute: true
 			},
 			_showTime: {
 				type: String,
-				computed: '_computeShowTime(date)',
-				value: 'Add a time'
-			},
-			_hasDate: {
-				type: Boolean,
-				computed: '_computeHasDate(date)',
-				value: false
-			},
-			icon: String
+				computed: '_computeShowTime(date)'
+			}
 		},
 
 		// Private methods
@@ -82,15 +77,15 @@
 			// @see http://stackoverflow.com/a/31482376
 			this.async(function() {
 				// Initialize dialog with the current date (default to today to avoid exception)
-				dialog.date = this._hasDate ? this.date : new Date();
+				dialog.date = this.date || new Date();
 
 				// Capture date if the user saved the dialog
 				dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
 					var newDate = e.detail;
 
 					// If there is already a time picked, don't change it
-					if (typeof this.time !== 'undefined' && this.time !== null) {
-						newDate.setHours(this.time.hour, this.time.minute);
+					if (typeof this.date !== 'undefined' && this.date !== null) {
+						newDate.setHours(this.date.hour, this.date.minute);
 					}
 					this.date = newDate;
 
@@ -101,16 +96,21 @@
 				dialog.open();
 			});
 		},
-		_computeShowDate: function(date) {
+		_getPrettyDate: function(date) {
+			if (!date) {
+				return 'Add a date';
+			}
+
 			// Use momentjs.com library to format the date
 			return moment(date).format('ll');
-		},
-		_computeHasDate: function(date) {
-			return typeof date !== 'undefined' && date !== null;
 		},
 
 		// Time related private methods
 		_computeShowTime: function(date) {
+			if (!date) {
+				return '';
+			}
+
 			return moment(date).format('hh:mm A');
 		},
 		_editTime: function() {
@@ -136,6 +136,9 @@
 
 				dialog.open();
 			}.bind(this));
+		},
+		_computeHasNoDate: function(date) {
+			return !date;
 		},
 
 		// Timezone handling

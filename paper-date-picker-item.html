@@ -53,7 +53,7 @@
 			// @see http://stackoverflow.com/a/31482376
 			this.async(function() {
 				// Initialize dialog with the current date (default to today to avoid exception)
-				dialog.date = this._hasDate ? this.date : new Date();
+				dialog.date = this.date || new Date();
 
 				// Capture date if the user saved the dialog
 				dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
