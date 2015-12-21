@@ -85,7 +85,9 @@
 
 					// If there is already a time picked, don't change it
 					if (typeof this.date !== 'undefined' && this.date !== null) {
-						newDate.setHours(this.date.hour, this.date.minute);
+						var hours = moment(this.date).format('HH');
+						var minutes = moment(this.date).format('mm');
+						newDate.setHours(hours, minutes);
 					}
 					this.date = newDate;
 
@@ -110,32 +112,27 @@
 			if (!date) {
 				return '';
 			}
-
-			return moment(date).format('hh:mm A');
+			return moment(date).format('LT');
 		},
 		_editTime: function() {
 			var dialog = document.createElement('paper-time-picker-edit-dialog');
 			// Wait until dialog is created before the properties can be set
 			// @see http://stackoverflow.com/a/31482376
 			this.async(function() {
-				// Initialize dialog with the current time
-				dialog.time = this._showTime;
+				// Initialize dialog with the current date (default to today to avoid exception)
+				dialog.date = new Date(this.date.getTime()) || new Date();
 
 				// Capture date if the user saved the dialog
 				dialog.addEventListener('paper-time-picker-edit-dialog-save', function(e) {
-					// time object containing hour, minute and formatted 'HH:mm A' string
-					var time = e.detail;
-					this.date.setHours(time.hour, time.minute);
-
-					//TODO: propagate the change to the _showTime field to display the new time
-					//this._showTime = this.time.formatted
+					// Set date (default to today to avoid exception)
+					this.date = e.detail;
 
 					// Inform listener of 'change' events when the date was changed
 					this.fire('change', { value: this.date });
 				}.bind(this));
 
 				dialog.open();
-			}.bind(this));
+			});
 		},
 		_computeHasNoDate: function(date) {
 			return !date;
