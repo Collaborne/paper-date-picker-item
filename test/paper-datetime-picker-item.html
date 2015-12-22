@@ -34,7 +34,7 @@
 						element.date = new Date(2015, 10, 17, 0, 0, 0, 0);
 						var dialog = element._editDate();
 
-						setTimeout(function() {
+						element.async(function() {
 							expect(dialog.date).to.be.eql(element.date);
 							done();
 						});
@@ -45,7 +45,7 @@
 
 						var dialog = element._editDate();
 
-						setTimeout(function() {
+						element.async(function() {
 							expect(dialog.date).to.be.not.eql(null);
 							done();
 						});
@@ -55,7 +55,7 @@
 						expect(element.date).to.be.eql(null);
 
 						var dialog = element._editDate();
-						setTimeout(function() {
+						element.async(function() {
 							dialog.date = new Date(2015, 10, 17, 0, 0, 0, 0);
 							dialog.save();
 
@@ -72,7 +72,7 @@
 						});
 
 						var dialog = element._editDate();
-						setTimeout(function() {
+						element.async(function() {
 							dialog.date = expectedDate;
 							dialog.save();
 						});
@@ -90,7 +90,7 @@
 						element.date = new Date(2015, 10, 17, 0, 0, 0, 0);
 						var dialog = element._editTime();
 
-						setTimeout(function() {
+						element.async(function() {
 							expect(dialog.date).to.be.eql(element.date);
 							done();
 						});
@@ -101,7 +101,7 @@
 
 						var dialog = element._editTime();
 
-						setTimeout(function() {
+						element.async(function() {
 							expect(dialog.date).to.be.not.eql(null);
 							done();
 						});
@@ -111,7 +111,7 @@
 						expect(element.date).to.be.eql(null);
 
 						var dialog = element._editTime();
-						setTimeout(function() {
+						element.async(function() {
 							dialog.date = new Date(2015, 10, 17, 0, 0, 0, 0);
 							dialog.save();
 
@@ -128,7 +128,7 @@
 						});
 
 						var dialog = element._editTime();
-						setTimeout(function() {
+						element.async(function() {
 							dialog.date = expectedDate;
 							dialog.save();
 						});
