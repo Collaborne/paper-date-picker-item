@@ -15,7 +15,7 @@
 	</head>
 	<body>
 
-		<test-fixture id="TrivialEmailElement">
+		<test-fixture id="TrivialDatePickerElement">
 			<template>
 				<paper-date-picker-item></paper-date-picker-item>
 			</template>
@@ -27,12 +27,12 @@
 					var element;
 
 					setup(function() {
-						element = fixture('TrivialEmailElement');
+						element = fixture('TrivialDatePickerElement');
 					});
 
 					test('passes date to edit dialog', function(done) {
 						element.date = new Date(2015, 10, 17, 0, 0, 0, 0);
-						var dialog = element._edit();
+						var dialog = element._editDate();
 
 						setTimeout(function() {
 							expect(dialog.date).to.be.eql(element.date);
@@ -43,7 +43,7 @@
 						// Pre-condition: date is not set
 						expect(element.date).to.be.eql(null);
 
-						var dialog = element._edit();
+						var dialog = element._editDate();
 
 						setTimeout(function() {
 							expect(dialog.date).to.be.not.eql(null);
@@ -54,7 +54,7 @@
 						// Pre-condition: date is not set
 						expect(element.date).to.be.eql(null);
 
-						var dialog = element._edit();
+						var dialog = element._editDate();
 						setTimeout(function() {
 							dialog.date = new Date(2015, 10, 17, 0, 0, 0, 0);
 							dialog.save();
@@ -71,7 +71,7 @@
 							done();
 						});
 
-						var dialog = element._edit();
+						var dialog = element._editDate();
 						setTimeout(function() {
 							dialog.date = expectedDate;
 							dialog.save();
