@@ -16,7 +16,7 @@
 		</style>
 
 		<paper-dialog id='dialog' class='paper-time-picker-dialog dialog' modal entry-animation='fade-in-animation' exit-animation='fade-out-animation' on-iron-overlay-closed='_onClosed'>
-			<paper-time-picker id='timePicker' time='[[_extractTime]]'></paper-time-picker>
+			<paper-time-picker id='timePicker' time='[[_extractTime(date)]]'></paper-time-picker>
 			<div class='buttons'>
 				<paper-button dialog-dismiss>Cancel</paper-button>
 				<paper-button dialog-confirm on-tap='close'>OK</paper-button>
@@ -57,12 +57,9 @@
 			// Remove the dialog from the DOM once the exit animation is finished
 			Polymer.dom(this.parentNode).removeChild(this);
 		},
-		_extractTime: function() {
-			if (!this.date) {
-				// no date is defined. Default to today.
-				this.date = new Date();
-			}
-			return moment(this.date).format('LT');
+		_extractTime: function(date) {
+			// no date is defined. Default to today.
+			return moment(!date ? date : new Date()).format('LT');
 		}
 	});
 
