@@ -1,0 +1,39 @@
+<script>
+EditDateBehavior = {
+    properties: {
+        date: {
+            type: Date,
+            value: null,
+            notify: true
+        }
+    },
+
+    _edit: function(dialogId) {
+        var dialog = document.createElement('paper-date-picker-edit-dialog');
+
+        // Wait until dialog is created before the properties can be set
+        // @see http://stackoverflow.com/a/31482376
+        this.async(function() {
+            // Initialize dialog with the current date (default to today to avoid exception)
+            if (!this.date) {
+                dialog.date = new Date();
+            } else {
+                dialog.date = new Date(this.date.getTime());
+            }
+
+            // Capture date if the user saved the dialog
+            dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
+                this.date = e.detail;
+
+                // Inform listener of "change" events when the date was changed
+                this.fire('change', { value: this.date });
+            }.bind(this));
+
+            dialog.open();
+        }.bind(this));
+
+        // Return dialog for unit testing
+        return dialog;
+    }
+};
+</script>
