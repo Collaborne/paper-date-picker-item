@@ -7,6 +7,7 @@
 <link rel='import' href='../paper-styles/paper-styles.html'>
 <link rel='import' href='paper-date-picker-edit-dialog.html'>
 <link rel='import' href='paper-time-picker-edit-dialog.html'>
+<link rel='import' href='paper-date-picker-behaviors.html'>
 
 <script src='../moment/min/moment-with-locales.min.js'></script>
 
@@ -27,7 +28,7 @@
 	</style>
 
 	<template>
-		<paper-icon-item on-tap='_edit' class='flex'>
+		<paper-icon-item on-tap='_editDate' class='flex'>
 			<paper-ripple fit></paper-ripple>
 			<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
 			<paper-item-body class='text'>[[_getFormattedDate(date)]]</paper-item-body>
@@ -46,6 +47,7 @@
 
 	Polymer({
 		is: 'paper-datetime-picker-item',
+		behaviors: [DateFormatBehavior],
 		properties: {
 			date: {
 				type: Date,
@@ -55,7 +57,7 @@
 			icon: String,
 			timeZoneOffset: {
 				type: String,
-				computed: '_computeTimeZoneOffset(date)',
+				computed: '_getTimeZoneOffset(date)',
 			},
 
 			hasNoDate: {
@@ -65,12 +67,12 @@
 			},
 			_showTime: {
 				type: String,
-				computed: '_computeShowTime(date)'
+				computed: '_getFormattedTime(date)'
 			}
 		},
 
 		// Private methods
-		_edit: function() {
+		_editDate: function() {
 			var dialog = document.createElement('paper-date-picker-edit-dialog');
 
 			// Wait until dialog is created before the properties can be set
@@ -98,22 +100,7 @@
 				dialog.open();
 			});
 		},
-		_getFormattedDate: function(date) {
-			if (!date) {
-				return 'Add a date';
-			}
-
-			// Use momentjs.com library to format the date
-			return moment(date).format('ll');
-		},
-
 		// Time related private methods
-		_computeShowTime: function(date) {
-			if (!date) {
-				return '';
-			}
-			return moment(date).format('LT');
-		},
 		_editTime: function() {
 			var dialog = document.createElement('paper-time-picker-edit-dialog');
 			// Wait until dialog is created before the properties can be set
@@ -136,13 +123,7 @@
 		},
 		_computeHasNoDate: function(date) {
 			return !date;
-		},
-
-		// Timezone handling
-		_computeTimeZoneOffset: function(date) {
-			// Use momentjs.com library to obtain the timezone in +0100 format
-			return moment.parseZone(date).format('ZZ');
-		},
+		}
 	});
 
 })();

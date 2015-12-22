@@ -1,0 +1,26 @@
+// Set of common behaviors for the date-picker-irem and the datetime-picker-item
+<script>
+
+DateFormatBehavior = {
+    // Format date
+    _getFormattedDate: function(date) {
+        if (!date) {
+            return 'Add a date';
+        }
+        // Use momentjs.com library to format the date
+        return moment(date).format('ll');
+    },
+    // Format time
+    _getFormattedTime: function(date) {
+        if (!date) {
+            return '';
+        }
+        return moment(date).format('LT');
+    },
+    // Format date as timezone
+    _getTimeZoneOffset: function(date) {
+        // Use momentjs.com library to obtain the timezone in +0100 format
+        return moment.parseZone(date).format('ZZ');
+    }
+}
+</script>
