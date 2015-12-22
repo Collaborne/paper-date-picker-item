@@ -1,8 +1,44 @@
 // Set of common behaviors for the date-picker-irem and the datetime-picker-item
 <script src='../moment/min/moment-with-locales.min.js'></script>
 <script>
+var Polymer = Polymer || {};
+Polymer.PaperDatePickerItemBehaviorImpl = {
+    properties: {
+        date: {
+            type: Date,
+            value: null,
+            notify: true
+        }
+    },
 
-DateFormatBehavior = {
+    _edit: function(dialogId) {
+        var dialog = document.createElement(dialogId);
+
+        // Wait until dialog is created before the properties can be set
+        // @see http://stackoverflow.com/a/31482376
+        this.async(function() {
+            // Initialize dialog with the current date (default to today to avoid exception)
+            if (!this.date) {
+                dialog.date = new Date();
+            } else {
+                dialog.date = new Date(this.date.getTime());
+            }
+
+            // Capture date if the user saved the dialog
+            dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
+                this.date = e.detail;
+
+                // Inform listener of "change" events when the date was changed
+                this.fire('change', { value: this.date });
+            }.bind(this));
+
+            dialog.open();
+        }.bind(this));
+
+        // Return dialog for unit testing
+        return dialog;
+    },
+
     // Format date
     _getFormattedDate: function(date) {
         if (!date) {
@@ -18,5 +54,7 @@ DateFormatBehavior = {
         }
         return moment(date).format('LT');
     }
-}
+};
+
+Polymer.PaperDatePickerItemBehavior = [ Polymer.PaperDatePickerItemBehaviorImpl ];
 </script>
