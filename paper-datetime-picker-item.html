@@ -45,15 +45,13 @@
 
 	Polymer({
 		is: 'paper-datetime-picker-item',
-		behaviors: [DateFormatBehavior],
 		properties: {
-			date: {
-				type: Date,
-				value: null,
-				notify: true
-			},
 			icon: String
 		},
+
+		behaviors: [
+			Polymer.PaperDatePickerItemBehavior
+		],
 
 		// Private methods
 		_editDate: function() {
@@ -70,6 +68,8 @@
 					var newDate = e.detail;
 
 					// If there is already a time picked, don't change it
+					// TODO: this piece is only necessary because of this issue with the date picker: https://github.com/bendavis78/paper-date-picker/issues/50
+					// Once issue is solved this method can be replaced by PaperDatePickerItemBehaviorImpl._edit
 					if (typeof this.date !== 'undefined' && this.date !== null) {
 						var hours = moment(this.date).format('HH');
 						var minutes = moment(this.date).format('mm');
@@ -86,24 +86,7 @@
 		},
 		// Time related private methods
 		_editTime: function() {
-			var dialog = document.createElement('paper-time-picker-edit-dialog');
-			// Wait until dialog is created before the properties can be set
-			// @see http://stackoverflow.com/a/31482376
-			this.async(function() {
-				// Initialize dialog with the current date (default to today to avoid exception)
-				dialog.date = new Date(this.date.getTime()) || new Date();
-
-				// Capture date if the user saved the dialog
-				dialog.addEventListener('paper-time-picker-edit-dialog-save', function(e) {
-					// Set date (default to today to avoid exception)
-					this.date = e.detail;
-
-					// Inform listener of 'change' events when the date was changed
-					this.fire('change', { value: this.date });
-				}.bind(this));
-
-				dialog.open();
-			});
+			this._edit('paper-time-picker-edit-dialog');
 		}
 	});
 
