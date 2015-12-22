@@ -16,11 +16,6 @@ DateFormatBehavior = {
             return '';
         }
         return moment(date).format('LT');
-    },
-    // Format date as timezone
-    _getTimeZoneOffset: function(date) {
-        // Use momentjs.com library to obtain the timezone in +0100 format
-        return moment.parseZone(date).format('ZZ');
     }
 }
 </script>
