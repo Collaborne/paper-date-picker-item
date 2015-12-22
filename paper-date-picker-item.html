@@ -20,7 +20,7 @@
 	</style>
 
 	<template>
-		<paper-icon-item class='item' on-tap='_edit' has-no-date$=[[!date]]>
+		<paper-icon-item class='item' on-tap='_editDate' has-no-date$=[[!date]]>
 			<paper-ripple fit></paper-ripple>
 			<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
 			<paper-item-body class='text'>[[_getFormattedDate(date)]]</paper-item-body>
@@ -35,42 +35,18 @@
 
 	Polymer({
 		is: 'paper-date-picker-item',
-		behaviors: [DateFormatBehavior],
 		properties: {
-			date: {
-				type: Date,
-				value: null,
-				notify: true
-			},
 			icon: String
 		},
 
-		// Private methods
-		_edit: function() {
-			var dialog = document.createElement('paper-date-picker-edit-dialog');
+		behaviors: [
+			Polymer.PaperDatePickerItemBehavior
+		],
 
-			// Wait until dialog is created before the properties can be set
-			// @see http://stackoverflow.com/a/31482376
-			this.async(function() {
-				// Initialize dialog with the current date (default to today to avoid exception)
-				dialog.date = this.date || new Date();
-
-				// Capture date if the user saved the dialog
-				dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
-					this.date = e.detail;
-
-					// Inform listener of "change" events when the date was changed
-					this.fire('change', { value: this.date });
-				}.bind(this));
-
-				dialog.open();
-			}.bind(this));
-
-			// Return dialog for unit testing
-			return dialog;
+		_editDate: function() {
+			this._edit('paper-date-picker-edit-dialog');
 		}
 	});
-
 })();
 
 </script>
