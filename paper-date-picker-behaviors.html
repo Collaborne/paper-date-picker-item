@@ -3,7 +3,10 @@
 <script src='../moment/min/moment-with-locales.min.js'></script>
 <script>
 var Polymer = Polymer || {};
-Polymer.PaperDatePickerItemBehaviorImpl = {
+/**
+ * @polymerBehavior Polymer.PaperDatePickerItemBehavior
+ */
+Polymer.PaperDatePickerItemBehavior = {
     properties: {
         date: {
             type: Date,
@@ -56,8 +59,4 @@ Polymer.PaperDatePickerItemBehaviorImpl = {
         return moment(date).format('LT');
     }
 };
-
-Polymer.PaperDatePickerItemBehavior = [
-    Polymer.PaperDatePickerItemBehaviorImpl
-];
 </script>
