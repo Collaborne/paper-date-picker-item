@@ -106,33 +106,6 @@
 							done();
 						});
 					});
-					test('captures date set in edit dialog', function(done) {
-						// Pre-condition: date is not set
-						expect(element.date).to.be.eql(null);
-
-						var dialog = element._editTime();
-						element.async(function() {
-							dialog.date = new Date(2015, 10, 17, 0, 0, 0, 0);
-							dialog.save();
-
-							expect(element.date).to.be.eql(dialog.date);
-							done();
-						});
-					});
-					test('fires change event if date was set in edit dialog', function(done) {
-						var expectedDate = new Date(2015, 10, 17, 0, 0, 0, 0);
-
-						element.addEventListener('change', function(e) {
-							expect(e.detail.value).to.be.eql(expectedDate);
-							done();
-						});
-
-						var dialog = element._editTime();
-						element.async(function() {
-							dialog.date = expectedDate;
-							dialog.save();
-						});
-					});
 				});
 
 				suite('format date and time behavior', function() {
