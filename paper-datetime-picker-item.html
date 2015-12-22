@@ -22,20 +22,20 @@
 			color: var(--disabled-text-color);
 		}
 
-		:host[has-no-date] .text {
+		.item[has-no-date] .text {
 			color: var(--secondary-text-color);
 		}
 	</style>
 
 	<template>
-		<paper-icon-item on-tap='_editDate' class='flex'>
+		<paper-icon-item on-tap='_editDate' class='flex item' has-no-date$=[[!date]]>
 			<paper-ripple fit></paper-ripple>
 			<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
 			<paper-item-body class='text'>[[_getFormattedDate(date)]]</paper-item-body>
 		</paper-icon-item>
 		<paper-item class='flex' on-tap='_editTime' hidden=[[!date]]>
 			<paper-ripple fit></paper-ripple>
-			[[_showTime]]
+			[[_getFormattedTime(date)]]
 		</paper-item>
 	</template>
 
@@ -54,16 +54,7 @@
 				value: null,
 				notify: true
 			},
-			icon: String,
-			hasNoDate: {
-				type: Boolean,
-				computed: '_computeHasNoDate(date)',
-				reflectToAttribute: true
-			},
-			_showTime: {
-				type: String,
-				computed: '_getFormattedTime(date)'
-			}
+			icon: String
 		},
 
 		// Private methods
@@ -115,9 +106,6 @@
 
 				dialog.open();
 			});
-		},
-		_computeHasNoDate: function(date) {
-			return !date;
 		}
 	});
 
