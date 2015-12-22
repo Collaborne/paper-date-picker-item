@@ -59,7 +59,7 @@
 		},
 		_extractTime: function(date) {
 			// no date is defined. Default to today.
-			return moment(!date ? date : new Date()).format('LT');
+			return moment(date ? date : new Date()).format('LT');
 		}
 	});
 
