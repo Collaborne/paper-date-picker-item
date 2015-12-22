@@ -5,6 +5,7 @@
 <link rel='import' href='../paper-ripple/paper-ripple.html'>
 <link rel='import' href='../paper-styles/paper-styles.html'>
 <link rel='import' href='paper-date-picker-edit-dialog.html'>
+<link rel='import' href='paper-date-picker-behaviors.html'>
 
 <script src='../moment/min/moment-with-locales.min.js'></script>
 
@@ -36,6 +37,7 @@
 
 	Polymer({
 		is: 'paper-date-picker-item',
+		behaviors: [DateFormatBehavior],
 		properties: {
 			date: {
 				type: Date,
@@ -68,14 +70,6 @@
 
 			// Return dialog for unit testing
 			return dialog;
-		},
-		_getFormattedDate: function(date) {
-			if (!date) {
-				return 'Add a date';
-			}
-
-			// Use momentjs.com library to format the date
-			return moment(date).format('ll');
 		}
 	});
 
