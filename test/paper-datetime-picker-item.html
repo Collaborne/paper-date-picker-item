@@ -79,35 +79,6 @@
 					});
 				});
 
-				suite('time dialog integration behavior', function() {
-					var element;
-
-					setup(function() {
-						element = fixture('TrivialDateTimePickerElement');
-					});
-
-					test('passes date to edit dialog', function(done) {
-						element.date = new Date(2015, 10, 17, 0, 0, 0, 0);
-						var dialog = element._editTime();
-
-						element.async(function() {
-							expect(dialog.date).to.be.eql(element.date);
-							done();
-						});
-					});
-					test('defaults date in edit dialog to now if no date is set', function(done) {
-						// Pre-condition: date is not set
-						expect(element.date).to.be.eql(null);
-
-						var dialog = element._editTime();
-
-						element.async(function() {
-							expect(dialog.date).to.be.not.eql(null);
-							done();
-						});
-					});
-				});
-
 				suite('format date and time behavior', function() {
 					var element;
 
