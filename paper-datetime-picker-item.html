@@ -26,14 +26,14 @@
 	</style>
 
 	<template>
-		<paper-icon-item on-tap='_editDate' class='flex item' has-no-date$=[[!date]]>
+		<paper-icon-item on-tap='_editDate' class='flex item' has-no-date$=[[_hasNoDate]]>
 			<paper-ripple fit></paper-ripple>
 			<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
-			<paper-item-body class='text'>[[_getFormattedDate(date)]]</paper-item-body>
+			<paper-item-body class='text'>[[_formattedDate]]</paper-item-body>
 		</paper-icon-item>
 		<paper-item class='flex' on-tap='_editTime' hidden=[[!date]]>
 			<paper-ripple fit></paper-ripple>
-			[[_getFormattedTime(date)]]
+			[[_formattedTime]]
 		</paper-item>
 	</template>
 
@@ -46,7 +46,22 @@
 	Polymer({
 		is: 'paper-datetime-picker-item',
 		properties: {
-			icon: String
+			icon: String,
+			_formattedDate: {
+				type: String,
+				value: 'Add a date',
+				computed: '_getFormattedDate(date)'
+			},
+			_formattedTime: {
+				type: String,
+				value: '',
+				computed: '_getFormattedTime(date)'
+			},
+			_hasNoDate: {
+				type: Boolean,
+				value: true,
+				computed: '_computeHasNoDate(date)'
+			}
 		},
 
 		behaviors: [
@@ -90,6 +105,9 @@
 		// Time related private methods
 		_editTime: function() {
 			return this._edit('paper-time-picker-edit-dialog');
+		},
+		_computeHasNoDate: function(date) {
+			return typeof date === 'undefined' || date === null;
 		}
 	});
 
