@@ -47,11 +47,7 @@
 		is: 'paper-datetime-picker-item',
 		properties: {
 			icon: String,
-			_formattedDate: {
-				type: String,
-				value: 'Add a date',
-				computed: '_getFormattedDate(date,placeholder)'
-			},
+			_formattedDate: String,
 			_formattedTime: {
 				type: String,
 				value: '',
@@ -66,6 +62,12 @@
 
 		behaviors: [
 			Polymer.PaperDatePickerItemBehavior
+		],
+
+		// Trigger calculation of _formattedDate also if date is undefined
+		observers: [
+			'_onChangedPlaceholder(placeholder)',
+			'_onChangedDate(date)'
 		],
 
 		// Private methods
@@ -102,6 +104,13 @@
 			// Return dialog for unit testing
 	        return dialog;
 		},
+		_onChangedPlaceholder: function(placeholder) {
+			this._formattedDate = this._getFormattedDate(this.date, placeholder);
+		},
+		_onChangedDate: function(date) {
+			this._formattedDate = this._getFormattedDate(date, this.placeholder);
+		},
+
 		// Time related private methods
 		_editTime: function() {
 			return this._edit('paper-time-picker-edit-dialog');
