@@ -50,7 +50,7 @@ Polymer.PaperDatePickerItemBehavior = {
     // Format date
     _getFormattedDate: function(date, placeholder) {
         if (!date) {
-            return this.placeholder;
+            return placeholder;
         }
         // Use momentjs.com library to format the date
         return moment(date).format('ll');

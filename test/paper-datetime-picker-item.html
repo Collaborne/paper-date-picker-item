@@ -87,13 +87,13 @@
 					});
 
 					test('formats the date', function() {
-						expect(element._getFormattedDate(new Date(2015, 10, 17, 0, 0, 0, 0))).to.be.eql('Nov 17, 2015');
+						expect(element._getFormattedDate(new Date(2015, 10, 17, 0, 0, 0, 0), null)).to.be.eql('Nov 17, 2015');
 					});
 					test('return placeholder if date is undefined', function() {
-						expect(element._getFormattedDate(undefined)).to.be.eql('Add a date');
+						expect(element._getFormattedDate(undefined, 'A placeholder')).to.be.eql('A placeholder');
 					});
 					test('return placeholder if date is null', function() {
-						expect(element._getFormattedDate(null)).to.be.eql('Add a date');
+						expect(element._getFormattedDate(null, 'A placeholder')).to.be.eql('A placeholder');
 					});
 
 					test('formats the time', function() {
