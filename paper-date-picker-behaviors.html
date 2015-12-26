@@ -12,6 +12,10 @@ Polymer.PaperDatePickerItemBehavior = {
             type: Date,
             value: null,
             notify: true
+        },
+        placeholder: {
+            type: String,
+            value: 'Add a date'
         }
     },
 
@@ -44,9 +48,9 @@ Polymer.PaperDatePickerItemBehavior = {
     },
 
     // Format date
-    _getFormattedDate: function(date) {
+    _getFormattedDate: function(date, placeholder) {
         if (!date) {
-            return 'Add a date';
+            return this.placeholder;
         }
         // Use momentjs.com library to format the date
         return moment(date).format('ll');
