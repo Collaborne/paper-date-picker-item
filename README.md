@@ -8,23 +8,9 @@ This component uses the component [paper-date-picker](https://github.com/bendavi
 ![Screenshot](/doc/screenshot.png "Screenshot")
 
 
-## Usage
+To use the elements:
 
 `bower install paper-date-picker-item`
-
-```html
-<paper-date-picker-item icon="icons:today" date={{date}}></paper-date-picker-item>
-```
-
-
-## Properties
-
-These properties are available for `paper-date-picker-item`:
-
-Property   | Type   | Description
----------- | ------ | ----------------------------
-**icon**   | String | Icon shown left of the date
-**date**   | Date   | Date reflected by the component
 
 
 ## License

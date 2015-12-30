@@ -7,6 +7,17 @@
 <link rel='import' href='paper-date-picker-edit-dialog.html'>
 <link rel='import' href='paper-date-picker-behaviors.html'>
 
+<!--
+`paper-date-picker-item` provides a Material Design item that shows a date and opens a date picker dialog on tap.
+
+### Example
+
+```html
+<paper-date-picker-item icon="icons:today" date={{date}}></paper-date-picker-item>
+```
+
+@demo demo/index.html
+-->
 <dom-module id='paper-date-picker-item'>
 
 	<style>
@@ -36,6 +47,9 @@
 	Polymer({
 		is: 'paper-date-picker-item',
 		properties: {
+			/**
+			 * Icon shown left of the date
+			 */
 			icon: String
 		},
 

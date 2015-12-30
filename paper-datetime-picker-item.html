@@ -9,6 +9,17 @@
 <link rel='import' href='paper-time-picker-edit-dialog.html'>
 <link rel='import' href='paper-date-picker-behaviors.html'>
 
+<!--
+`paper-datetime-picker-item` provides a Material Design item that shows a date and a time and opens a date/time picker dialog on tap.
+
+### Example
+
+```html
+<paper-datetime-picker-item icon="icons:today" date={{date}}></paper-datetime-picker-item>
+```
+
+@demo demo/index.html
+-->
 <dom-module id='paper-datetime-picker-item'>
 
 	<style>
@@ -46,7 +57,11 @@
 	Polymer({
 		is: 'paper-datetime-picker-item',
 		properties: {
+			/**
+			 * Icon shown left of the date
+			 */
 			icon: String,
+			
 			_formattedDate: String,
 			_formattedTime: {
 				type: String,

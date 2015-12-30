@@ -4,15 +4,24 @@
 <script>
 var Polymer = Polymer || {};
 /**
+ * Shared functionality for date picker
+ *
  * @polymerBehavior Polymer.PaperDatePickerItemBehavior
  */
 Polymer.PaperDatePickerItemBehavior = {
     properties: {
+    	/**
+    	 * Date reflected by the component
+    	 */
         date: {
             type: Date,
             value: null,
             notify: true
         },
+        
+        /**
+         * Text shown when no date is set
+         */
         placeholder: {
             type: String,
             value: 'Add a date'
