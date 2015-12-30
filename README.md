@@ -1,3 +1,6 @@
+_[Demo and API Docs](http://collaborne.github.io/paper-date-picker-item)_
+
+
 paper-date-picker-item [![Bower version](https://badge.fury.io/bo/paper-date-picker-item.svg)](http://badge.fury.io/bo/paper-date-picker-item) [![Travis state](https://travis-ci.org/Collaborne/paper-date-picker-item.svg?branch=master)](https://travis-ci.org/Collaborne/paper-date-picker-item)
 =========
 
