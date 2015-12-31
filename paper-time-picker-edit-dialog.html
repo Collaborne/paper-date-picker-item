@@ -13,7 +13,7 @@
 	<template>
 		<style include='paper-time-picker-dialog-style'></style>
 
-		<paper-dialog id='dialog' class='paper-time-picker-dialog' modal entry-animation='fade-in-animation' exit-animation='fade-out-animation' on-iron-overlay-closed='_onClosed'>
+		<paper-dialog id='dialog' class='paper-time-picker-dialog' modal on-iron-overlay-closed='_onClosed'>
 			<paper-time-picker id='timePicker' time='[[_extractTime(date)]]'></paper-time-picker>
 			<div class='buttons'>
 				<paper-button dialog-dismiss>Cancel</paper-button>
