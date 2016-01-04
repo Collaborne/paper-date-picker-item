@@ -61,6 +61,19 @@
 							done();
 						});
 					});
+                    test('saving dialog changes date in the element', function(done) {
+						// Pre-condition: date is not set
+						expect(element.date).to.be.eql(null);
+
+						var dialog = element._edit('paper-date-picker-edit-dialog');
+						setTimeout(function() {
+							dialog.date = new Date(2015, 10, 17, 0, 0, 0, 0);
+							dialog.save();
+
+							expect(element.date).to.be.eql(dialog.date);
+							done();
+						});
+					});
 					test('sets chosen date as current date', function(done) {
 						// Pre-condition: date is not set
 						expect(element.date).to.be.null;
