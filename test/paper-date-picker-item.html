@@ -29,18 +29,9 @@
 						element = fixture('TrivialDatePickerElement');
 					});
 
-					test('saving dialog changes date in the element', function(done) {
-						// Pre-condition: date is not set
-						expect(element.date).to.be.eql(null);
-
-						var dialog = element._editDate();
-						setTimeout(function() {
-							dialog.date = new Date(2015, 10, 17, 0, 0, 0, 0);
-							dialog.save();
-
-							expect(element.date).to.be.eql(dialog.date);
-							done();
-						});
+					test('component triggers creation of a date picker dialog', function(done) {
+						expect(element._editDate().tagName.toLowerCase()).to.be.eql('paper-date-picker-edit-dialog');
+						done();
 					});
 				});
 			});
