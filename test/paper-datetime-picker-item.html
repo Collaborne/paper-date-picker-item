@@ -23,34 +23,13 @@
 
 		<script>
 			suite('<paper-datetime-picker-item>', function() {
-				suite('date dialog integration behavior', function() {
+				suite('components integration behavior', function() {
 					var element;
 
 					setup(function() {
 						element = fixture('TrivialDateTimePickerElement');
 					});
-
-					test('passes date to edit dialog', function(done) {
-						element.date = new Date(2015, 10, 17, 0, 0, 0, 0);
-						var dialog = element._editDate();
-
-						element.async(function() {
-							expect(dialog.date).to.be.eql(element.date);
-							done();
-						});
-					});
-					test('defaults date in edit dialog to now if no date is set', function(done) {
-						// Pre-condition: date is not set
-						expect(element.date).to.be.eql(null);
-
-						var dialog = element._editDate();
-
-						element.async(function() {
-							expect(dialog.date).to.be.not.eql(null);
-							done();
-						});
-					});
-					test('captures date set in edit dialog', function(done) {
+					test('saving dialog changes date in the element', function(done) {
 						// Pre-condition: date is not set
 						expect(element.date).to.be.eql(null);
 
@@ -63,49 +42,6 @@
 							done();
 						});
 					});
-					test('fires change event if date was set in edit dialog', function(done) {
-						var expectedDate = new Date(2015, 10, 17, 0, 0, 0, 0);
-
-						element.addEventListener('change', function(e) {
-							expect(e.detail.value).to.be.eql(expectedDate);
-							done();
-						});
-
-						var dialog = element._editDate();
-						element.async(function() {
-							dialog.date = expectedDate;
-							dialog.save();
-						});
-					});
-				});
-
-				suite('format date and time behavior', function() {
-					var element;
-
-					setup(function() {
-						element = fixture('TrivialDateTimePickerElement');
-					});
-
-					test('formats the date', function() {
-						expect(element._getFormattedDate(new Date(2015, 10, 17, 0, 0, 0, 0), null)).to.be.eql('Nov 17, 2015');
-					});
-					test('return placeholder if date is undefined', function() {
-						expect(element._getFormattedDate(undefined, 'A placeholder')).to.be.eql('A placeholder');
-					});
-					test('return placeholder if date is null', function() {
-						expect(element._getFormattedDate(null, 'A placeholder')).to.be.eql('A placeholder');
-					});
-
-					test('formats the time', function() {
-						expect(element._getFormattedTime(new Date(2015, 10, 17, 0, 0, 0, 0))).to.be.eql('12:00 AM');
-					});
-					test('return time placeholder if date is undefined', function() {
-						expect(element._getFormattedTime(undefined)).to.be.eql('');
-					});
-					test('return time placeholder if date is null', function() {
-						expect(element._getFormattedTime(null)).to.be.eql('');
-					});
-
 				});
 			});
 		</script>

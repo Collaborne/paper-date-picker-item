@@ -36,7 +36,7 @@
                     });
                 });
 
-                suite('dialog integration behavior', function() {
+                suite('element edit behavior', function() {
 					var element;
 					setup(function() {
 						element = fixture('TrivialTestDatePickerElement');
@@ -86,6 +86,34 @@
                             element._changeDate(expectedDate);
 						});
 					});
+				});
+                suite('format date and time behavior', function() {
+					var element;
+
+					setup(function() {
+						element = fixture('TrivialTestDatePickerElement');
+					});
+
+					test('formats the date', function() {
+						expect(element._getFormattedDate(new Date(2015, 10, 17, 0, 0, 0, 0), null)).to.be.eql('Nov 17, 2015');
+					});
+					test('return placeholder if date is undefined', function() {
+						expect(element._getFormattedDate(undefined, 'A placeholder')).to.be.eql('A placeholder');
+					});
+					test('return placeholder if date is null', function() {
+						expect(element._getFormattedDate(null, 'A placeholder')).to.be.eql('A placeholder');
+					});
+
+					test('formats the time', function() {
+						expect(element._getFormattedTime(new Date(2015, 10, 17, 0, 0, 0, 0))).to.be.eql('12:00 AM');
+					});
+					test('return time placeholder if date is undefined', function() {
+						expect(element._getFormattedTime(undefined)).to.be.eql('');
+					});
+					test('return time placeholder if date is null', function() {
+						expect(element._getFormattedTime(null)).to.be.eql('');
+					});
+
 				});
 			});
 		</script>
