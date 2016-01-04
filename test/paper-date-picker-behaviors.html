@@ -11,6 +11,7 @@
 		<script src="../../iron-test-helpers/mock-interactions.js"></script>
 
 		<link rel="import" href="test-elements.html">
+        <link rel="import" href="../paper-date-picker-edit-dialog.html">
 		<link rel="import" href="../../test-fixture/test-fixture.html">
 	</head>
 	<body>
@@ -29,11 +30,63 @@
 						element = fixture('TrivialTestDatePickerElement');
 					});
 
-                    test('date is null when element is created', function() {
+                    test('date is null when element is created', function(done) {
                         expect(element.date).to.be.null;
+                        done();
                     });
-
                 });
+
+                suite('dialog integration behavior', function() {
+					var element;
+					setup(function() {
+						element = fixture('TrivialTestDatePickerElement');
+					});
+
+					test('passes date to edit dialog', function(done) {
+						element.date = new Date(2015, 10, 17, 0, 0, 0, 0);
+						var dialog = element._edit('paper-date-picker-edit-dialog');
+
+                        element.async(function() {
+							expect(dialog.date).to.be.eql(element.date);
+							done();
+						});
+					});
+					test('defaults date in edit dialog to a new date if no date is set', function(done) {
+						// Pre-condition: date is not set
+						expect(element.date).to.be.null;
+                        var dialog = element._edit('paper-date-picker-edit-dialog');
+
+                        element.async(function() {
+                            expect(dialog.date).to.be.a('date');
+							done();
+						});
+					});
+					test('sets chosen date as current date', function(done) {
+						// Pre-condition: date is not set
+						expect(element.date).to.be.null;
+
+						element.async(function() {
+							date = new Date(2015, 10, 17, 0, 0, 0, 0);
+                            element._changeDate(date);
+
+							expect(element.date).to.be.eql(date);
+							done();
+						});
+					});
+					test('fires change event if date was set in edit dialog', function(done) {
+						var expectedDate = new Date(2015, 10, 17, 0, 0, 0, 0);
+
+                        // Add listener for event that should be fired
+						element.addEventListener('change', function(e) {
+							expect(e.detail.value).to.be.eql(expectedDate);
+							done();
+						});
+
+						element.async(function() {
+                            element._changeDate(expectedDate);
+						});
+					});
+				});
 			});
 		</script>
 
