@@ -51,16 +51,16 @@
 							done();
 						});
 					});
-					test('defaults date in edit dialog to a new date if no date is set', function(done) {
-						// Pre-condition: date is not set
-						expect(element.date).to.be.null;
+                    test('defaults date in edit dialog to a new date if no date is set', function(done) {
+                    	// Pre-condition: date is not set
+                    	expect(element.date).to.be.null;
                         var dialog = element._edit('paper-date-picker-edit-dialog');
 
                         element.async(function() {
                             expect(dialog.date).to.be.a('date');
-							done();
-						});
-					});
+                    		done();
+                    	});
+                    });
                     test('saving dialog changes date in the element', function(done) {
 						// Pre-condition: date is not set
 						expect(element.date).to.be.eql(null);
