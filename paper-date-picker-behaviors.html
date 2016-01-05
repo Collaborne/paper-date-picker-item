@@ -38,7 +38,7 @@ Polymer.PaperDatePickerItemBehavior = {
             if (!this.date) {
                 dialog.date = new Date();
             } else {
-                dialog.date = new Date(this.date);
+                 dialog.date = moment(this.date).toDate();
             }
 
             // Capture date if the user saved the dialog

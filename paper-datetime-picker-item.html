@@ -61,7 +61,7 @@
 			 * Icon shown left of the date
 			 */
 			icon: String,
-			
+
 			_formattedDate: String,
 			_formattedTime: {
 				type: String,
@@ -93,7 +93,7 @@
 			// @see http://stackoverflow.com/a/31482376
 			this.async(function() {
 				// Initialize dialog with the current date (default to today to avoid exception)
-				dialog.date = this.date || new Date();
+				dialog.date = this.date? moment(this.date).toDate() : new Date();
 
 				// Capture date if the user saved the dialog
 				dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
