@@ -15,7 +15,7 @@
 			<paper-date-picker id='datePicker' date={{date}} forceNarrow></paper-date-picker>
 			<div class='buttons'>
 				<paper-button dialog-dismiss>Cancel</paper-button>
-				<paper-button dialog-confirm on-tap='save'>OK</paper-button>
+				<paper-button dialog-confirm on-tap='_save'>OK</paper-button>
 			</div>
 		</paper-dialog>
 	</template>
@@ -43,7 +43,7 @@
 				this.$.dialog.open();
 	        });
 		},
-		save: function() {
+		_save: function() {
 			// Inform listeners that the user confirmed the selected date
 			this.fire('paper-date-picker-edit-dialog-save', this.date);
 		},

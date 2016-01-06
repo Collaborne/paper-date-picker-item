@@ -17,7 +17,7 @@
 			<paper-time-picker id='timePicker' time='[[_extractTime(date)]]'></paper-time-picker>
 			<div class='buttons'>
 				<paper-button dialog-dismiss>Cancel</paper-button>
-				<paper-button dialog-confirm on-tap='save'>OK</paper-button>
+				<paper-button dialog-confirm on-tap='_save'>OK</paper-button>
 			</div>
 		</paper-dialog>
 	</template>
@@ -45,7 +45,7 @@
 				this.$.dialog.open();
 	        });
 		},
-		save: function() {
+		_save: function() {
 			this.date.setHours(this.$.timePicker.hour, this.$.timePicker.minute);
 
 			// Inform listeners that the user confirmed the selected date
