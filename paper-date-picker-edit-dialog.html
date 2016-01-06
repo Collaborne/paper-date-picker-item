@@ -35,7 +35,9 @@
 			}
 		},
 
-		// Public methods
+		/**
+		* Open modal dialog containing the date picker
+		*/
 		open: function() {
 			// Append dialog to the body. This ensures that the dialog claims the full screen instead of being positioned next to the <paper-date-picker-item>
 			Polymer.dom(document.body).appendChild(this);
@@ -43,12 +45,12 @@
 				this.$.dialog.open();
 	        });
 		},
+
+		// Private methods
 		_save: function() {
 			// Inform listeners that the user confirmed the selected date
 			this.fire('paper-date-picker-edit-dialog-save', this.date);
 		},
-
-		// Private methods
 		_onClosed: function(e, detail) {
 			// Remove the dialog from the DOM once the exit animation is finished
 			Polymer.dom(this.parentNode).removeChild(this);
