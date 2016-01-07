@@ -41,9 +41,11 @@
 		open: function() {
 			// Append dialog to the body. This ensures that the dialog claims the full screen instead of being positioned next to the <paper-date-picker-item>
 			Polymer.dom(document.body).appendChild(this);
-	        this.async(function() {
+
+			// Wait until dialog is added to the DOM (required for Safari)
+			setTimeout(function() {
 				this.$.dialog.open();
-	        });
+			}.bind(this), 1);
 		},
 
 		// Private methods
