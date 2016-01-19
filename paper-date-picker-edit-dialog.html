@@ -1,21 +1,21 @@
-<link rel='import' href='../polymer/polymer.html'>
-<link rel='import' href='../paper-button/paper-button.html'>
-<link rel='import' href='../paper-dialog/paper-dialog.html'>
-<link rel='import' href='../paper-date-picker/paper-date-picker.html'>
-<link rel='import' href='../paper-date-picker/paper-date-picker-dialog-style.html'>
-<link rel='import' href='../neon-animation/animations/fade-in-animation.html'>
-<link rel='import' href='../neon-animation/animations/fade-out-animation.html'>
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-dialog/paper-dialog.html">
+<link rel="import" href="../paper-date-picker/paper-date-picker.html">
+<link rel="import" href="../paper-date-picker/paper-date-picker-dialog-style.html">
+<link rel="import" href="../neon-animation/animations/fade-in-animation.html">
+<link rel="import" href="../neon-animation/animations/fade-out-animation.html">
 
-<dom-module id='paper-date-picker-edit-dialog'>
+<dom-module id="paper-date-picker-edit-dialog">
 
 	<template>
-		<style include='paper-date-picker-dialog-style'></style>
+		<style include="paper-date-picker-dialog-style"></style>
 
-		<paper-dialog id='dialog' class='paper-date-picker-dialog' modal on-iron-overlay-closed='_onClosed'>
-			<paper-date-picker id='datePicker' date={{date}} forceNarrow></paper-date-picker>
-			<div class='buttons'>
+		<paper-dialog id="dialog" class="paper-date-picker-dialog" modal on-iron-overlay-closed="_onClosed">
+			<paper-date-picker id="datePicker" date={{date}} forceNarrow></paper-date-picker>
+			<div class="buttons">
 				<paper-button dialog-dismiss>Cancel</paper-button>
-				<paper-button dialog-confirm on-tap='save'>OK</paper-button>
+				<paper-button dialog-confirm on-tap="save">OK</paper-button>
 			</div>
 		</paper-dialog>
 	</template>

@@ -1,13 +1,13 @@
-<link rel='import' href='../polymer/polymer.html'>
-<link rel='import' href='../iron-icon/iron-icon.html'>
-<link rel='import' href='../paper-item/paper-icon-item.html'>
-<link rel='import' href='../paper-item/paper-item.html'>
-<link rel='import' href='../paper-item/paper-item-body.html'>
-<link rel='import' href='../paper-ripple/paper-ripple.html'>
-<link rel='import' href='../paper-styles/paper-styles.html'>
-<link rel='import' href='paper-date-picker-edit-dialog.html'>
-<link rel='import' href='paper-time-picker-edit-dialog.html'>
-<link rel='import' href='paper-date-picker-behaviors.html'>
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../paper-item/paper-icon-item.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../paper-item/paper-item-body.html">
+<link rel="import" href="../paper-ripple/paper-ripple.html">
+<link rel="import" href="../paper-styles/paper-styles.html">
+<link rel="import" href="paper-date-picker-edit-dialog.html">
+<link rel="import" href="paper-time-picker-edit-dialog.html">
+<link rel="import" href="paper-date-picker-behaviors.html">
 
 <!--
 `paper-datetime-picker-item` provides a Material Design item that shows a date and a time and opens a date/time picker dialog on tap.
@@ -20,7 +20,7 @@
 
 @demo demo/index.html
 -->
-<dom-module id='paper-datetime-picker-item'>
+<dom-module id="paper-datetime-picker-item">
 
 	<style>
 		:host {
@@ -37,12 +37,12 @@
 	</style>
 
 	<template>
-		<paper-icon-item on-tap='_editDate' class='flex item' has-no-date$=[[_hasNoDate]]>
+		<paper-icon-item on-tap="_editDate" class="flex item" has-no-date$=[[_hasNoDate]]>
 			<paper-ripple fit></paper-ripple>
-			<iron-icon icon=[[icon]] item-icon class='icon'></iron-icon>
-			<paper-item-body class='text'>[[_formattedDate]]</paper-item-body>
+			<iron-icon icon=[[icon]] item-icon class="icon"></iron-icon>
+			<paper-item-body class="text">[[_formattedDate]]</paper-item-body>
 		</paper-icon-item>
-		<paper-item class='flex' on-tap='_editTime' hidden=[[_hasNoDate]]>
+		<paper-item class="flex" on-tap="_editTime" hidden=[[_hasNoDate]]>
 			<paper-ripple fit></paper-ripple>
 			[[_formattedTime]]
 		</paper-item>
