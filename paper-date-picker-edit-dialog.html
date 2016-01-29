@@ -1,3 +1,4 @@
+<!doctype html>
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-dialog/paper-dialog.html">
@@ -12,7 +13,7 @@
 		<style include="paper-date-picker-dialog-style"></style>
 
 		<paper-dialog id="dialog" class="paper-date-picker-dialog" modal on-iron-overlay-closed="_onClosed">
-			<paper-date-picker id="datePicker" date={{date}} forceNarrow></paper-date-picker>
+			<paper-date-picker id="datePicker" date="{{date}}" force-narrow></paper-date-picker>
 			<div class="buttons">
 				<paper-button dialog-dismiss>[[cancelButton]]</paper-button>
 				<paper-button dialog-confirm on-tap="save">[[okButton]]</paper-button>

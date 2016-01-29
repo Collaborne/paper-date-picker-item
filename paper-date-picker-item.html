@@ -1,3 +1,4 @@
+<!doctype html>
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../paper-item/paper-icon-item.html">
@@ -31,9 +32,9 @@
 	</style>
 
 	<template>
-		<paper-icon-item class="item" on-tap="_editDate" has-no-date$=[[!date]]>
+		<paper-icon-item class="item" on-tap="_editDate" has-no-date$="[[!date]]">
 			<paper-ripple fit></paper-ripple>
-			<iron-icon icon=[[icon]] item-icon class="icon"></iron-icon>
+			<iron-icon icon="[[icon]]" item-icon class="icon"></iron-icon>
 			<paper-item-body class="text">[[_getFormattedDate(date,placeholder)]]</paper-item-body>
 		</paper-icon-item>
 	</template>
