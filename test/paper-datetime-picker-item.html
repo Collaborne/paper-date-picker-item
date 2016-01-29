@@ -39,6 +39,50 @@
 						done();
 					});
 				});
+				suite('change placeholder behavior', function() {
+					var element;
+
+					setup(function() {
+						element = fixture('TrivialDateTimePickerElement');
+					});
+					test('changes placeholder', function(done) {
+						element._onChangedPlaceholder('placeholder');
+						expect(element._formattedDate).to.be.eql('placeholder');
+						done();
+					});
+				});
+				suite('change date behavior', function() {
+					var element;
+
+					setup(function() {
+						element = fixture('TrivialDateTimePickerElement');
+					});
+					test('changes date', function(done) {
+						var newDate = new Date();
+						element._onChangedDate(newDate);
+						expect(element._formattedDate).to.be.eql(moment(newDate).format('ll'));
+						done();
+					});
+				});
+				suite('check date', function() {
+					var element;
+
+					setup(function() {
+						element = fixture('TrivialDateTimePickerElement');
+					});
+					test('returns true if date is undefined', function(done) {
+						expect(element._computeHasNoDate(undefined)).to.be.true;
+						done();
+					});
+					test('returns true if date is undefined', function(done) {
+						expect(element._computeHasNoDate(undefined)).to.be.true;
+						done();
+					});
+					test('returns false if date is valid', function(done) {
+						expect(element._computeHasNoDate(new Date())).to.be.false;
+						done();
+					});
+				});
 			});
 		</script>
 

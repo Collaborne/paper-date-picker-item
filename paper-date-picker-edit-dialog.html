@@ -12,11 +12,19 @@
 	<template>
 		<style include="paper-date-picker-dialog-style"></style>
 
+<<<<<<< HEAD
 		<paper-dialog id="dialog" class="paper-date-picker-dialog" modal on-iron-overlay-closed="_onClosed">
 			<paper-date-picker id="datePicker" date="{{date}}" force-narrow></paper-date-picker>
 			<div class="buttons">
 				<paper-button dialog-dismiss>[[cancelButton]]</paper-button>
 				<paper-button dialog-confirm on-tap="save">[[okButton]]</paper-button>
+=======
+		<paper-dialog id='dialog' class='paper-date-picker-dialog' modal on-iron-overlay-closed='_onClosed'>
+			<paper-date-picker id='datePicker' date={{date}} forceNarrow></paper-date-picker>
+			<div class='buttons'>
+				<paper-button dialog-dismiss>Cancel</paper-button>
+				<paper-button dialog-confirm on-tap='_save'>OK</paper-button>
+>>>>>>> origin/master
 			</div>
 		</paper-dialog>
 	</template>
@@ -52,20 +60,24 @@
 	        }
 		},
 
-		// Public methods
+		/**
+		* Open modal dialog containing the date picker
+		*/
 		open: function() {
 			// Append dialog to the body. This ensures that the dialog claims the full screen instead of being positioned next to the <paper-date-picker-item>
 			Polymer.dom(document.body).appendChild(this);
-	        this.async(function() {
+
+			// Wait until dialog is added to the DOM (required for Safari)
+			setTimeout(function() {
 				this.$.dialog.open();
-	        });
-		},
-		save: function() {
-			// Inform listeners that the user confirmed the selected date
-			this.fire('paper-date-picker-edit-dialog-save', this.date);
+			}.bind(this), 1);
 		},
 
 		// Private methods
+		_save: function() {
+			// Inform listeners that the user confirmed the selected date
+			this.fire('paper-date-picker-edit-dialog-save', this.date);
+		},
 		_onClosed: function(e, detail) {
 			// Remove the dialog from the DOM once the exit animation is finished
 			Polymer.dom(this.parentNode).removeChild(this);
