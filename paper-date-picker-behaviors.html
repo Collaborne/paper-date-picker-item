@@ -25,6 +25,22 @@ Polymer.PaperDatePickerItemBehavior = {
         placeholder: {
             type: String,
             value: 'Add a date'
+        },
+
+        /**
+         * Text for the cancel button in the edit dialog. Use this property to localize the element.
+         */
+        cancelButton: {
+            type: String,
+            value: 'Cancel'
+        },
+
+        /**
+        * Text for the OK button in the edit dialog. Use this property to localize the element.
+         */
+        okButton: {
+            type: String,
+            value: 'OK'
         }
     },
 
@@ -38,8 +54,12 @@ Polymer.PaperDatePickerItemBehavior = {
             if (!this.date) {
                 dialog.date = new Date();
             } else {
-                 dialog.date = moment(this.date).toDate();
+                dialog.date = moment(this.date).toDate();
             }
+
+            // Localize text
+            dialog.cancelButton = this.cancelButton;
+            dialog.okButton = this.okButton;
 
             // Capture date if the user saved the dialog
             dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {

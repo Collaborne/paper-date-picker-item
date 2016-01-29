@@ -95,6 +95,10 @@
 				// Initialize dialog with the current date (default to today to avoid exception)
 				dialog.date = this.date? moment(this.date).toDate() : new Date();
 
+				// Localize text
+				dialog.cancelButton = this.cancelButton;
+	            dialog.okButton = this.okButton;
+
 				// Capture date if the user saved the dialog
 				dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
 					var newDate = e.detail;
