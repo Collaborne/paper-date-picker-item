@@ -14,19 +14,11 @@
 	<template>
 		<style include="paper-time-picker-dialog-style"></style>
 
-<<<<<<< HEAD
 		<paper-dialog id="dialog" class="paper-time-picker-dialog" modal on-iron-overlay-closed="_onClosed">
 			<paper-time-picker id="timePicker" time="[[_extractTime(date)]]"></paper-time-picker>
 			<div class="buttons">
 				<paper-button dialog-dismiss>[[cancelButton]]</paper-button>
 				<paper-button dialog-confirm on-tap="save">[[okButton]]</paper-button>
-=======
-		<paper-dialog id='dialog' class='paper-time-picker-dialog' modal on-iron-overlay-closed='_onClosed'>
-			<paper-time-picker id='timePicker' time='[[_extractTime(date)]]'></paper-time-picker>
-			<div class='buttons'>
-				<paper-button dialog-dismiss>Cancel</paper-button>
-				<paper-button dialog-confirm on-tap='_save'>OK</paper-button>
->>>>>>> origin/master
 			</div>
 		</paper-dialog>
 	</template>
@@ -74,7 +66,7 @@
 				this.$.dialog.open();
 			}.bind(this), 1);
 		},
-		
+
 		// Private methods
 		_save: function() {
 			this.date.setHours(this.$.timePicker.hour, this.$.timePicker.minute);
