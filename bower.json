@@ -30,7 +30,7 @@
     "neon-animation": "PolymerElements/neon-animation#^1.0.0",
     "paper-date-picker": "Collaborne/paper-date-picker#improvement/no-locales",
     "paper-time-picker": "bendavis78/paper-time-picker#^1.1.0",
-    "moment-element": "bendavis78/moment-element#^1.1.0"
+    "moment-element": "Collaborne/moment-element#fix/min-ref"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
