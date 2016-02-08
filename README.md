@@ -16,6 +16,17 @@ To use the elements:
 `bower install paper-date-picker-item`
 
 
+## i18n Support
+
+`paper-date-picker-item` uses [Moment.js](http://momentjs.com), and so supports all locales that Moment.js supports. But,
+the component does not reference any specific locale, so when you want to use it with a locale other than `en` you must
+load the locales explicitly.
+
+~~~~
+<link rel="import" href="bower_components/paper-date-picker-item/paper-date-picker-item.html">
+<script src="bower_components/moment/min/locales.js"></script>
+~~~~
+
 ## License
 
     This software is licensed under the Apache 2 license, quoted below.
@@ -33,4 +44,4 @@ To use the elements:
     WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
     License for the specific language governing permissions and limitations under
     the License.
-    
+
