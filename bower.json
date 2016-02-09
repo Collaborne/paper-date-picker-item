@@ -29,7 +29,7 @@
     "paper-styles": "PolymerElements/paper-styles#^1.0.0",
     "neon-animation": "PolymerElements/neon-animation#^1.0.0",
     "paper-date-picker": "Collaborne/paper-date-picker#improvement/no-locales",
-    "paper-time-picker": "bendavis78/paper-time-picker#^1.1.0",
+    "paper-time-picker": "bendavis78/paper-time-picker#master",
     "moment-element": "Collaborne/moment-element#fix/min-ref"
   },
   "devDependencies": {
