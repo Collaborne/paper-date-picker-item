@@ -17,7 +17,7 @@
 			<paper-time-picker id="timePicker" time="[[_extractTime(date)]]"></paper-time-picker>
 			<div class="buttons">
 				<paper-button dialog-dismiss>[[cancelButton]]</paper-button>
-				<paper-button dialog-confirm on-tap="save">[[okButton]]</paper-button>
+				<paper-button dialog-confirm on-tap="_save">[[okButton]]</paper-button>
 			</div>
 		</paper-dialog>
 	</template>
