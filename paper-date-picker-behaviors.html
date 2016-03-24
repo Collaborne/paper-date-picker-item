@@ -94,13 +94,6 @@ Polymer.PaperDatePickerItemBehavior = {
 			return '';
 		}
 		return moment(date).format('LT');
-	},
-	_getDefaultDateTime: function(defaultTime) {
-		if (!defaultTime) {
-			return new Date();
-		}
-		var time = new moment(defaultTime, 'HH:mm');
-		return time.toDate();
 	}
 };
 </script>
