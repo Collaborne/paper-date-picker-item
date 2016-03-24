@@ -21,6 +21,11 @@ Polymer.PaperDatePickerItemBehavior = {
 		},
 
 		/**
+		 * Default time if none has been specified, in a string format HH:mm
+		 */
+		defaultTime: String,
+
+		/**
 		* Text shown when no date is set. Use this property to localize the element.
 		*/
 		placeholder: {
@@ -52,11 +57,7 @@ Polymer.PaperDatePickerItemBehavior = {
 		// @see http://stackoverflow.com/a/31482376
 		this.async(function() {
 			// Initialize dialog with the current date (default to today to avoid exception)
-			if (!this.date) {
-				dialog.date = new Date();
-			} else {
-				dialog.date = moment(this.date).toDate();
-			}
+			dialog.date = this.date? moment(this.date).toDate() : new Date();
 
 			// Localize text
 			dialog.cancelButton = this.cancelButton;
@@ -93,6 +94,13 @@ Polymer.PaperDatePickerItemBehavior = {
 			return '';
 		}
 		return moment(date).format('LT');
+	},
+	_getDefaultDateTime: function(defaultTime) {
+		if (!defaultTime) {
+			return new Date();
+		}
+		var time = new moment(defaultTime, 'HH:mm');
+		return time.toDate();
 	}
 };
 </script>

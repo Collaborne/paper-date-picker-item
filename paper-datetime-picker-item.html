@@ -111,6 +111,12 @@
 						var hours = moment(this.date).format('HH');
 						var minutes = moment(this.date).format('mm');
 						newDate.setHours(hours, minutes);
+					} else if (this.defaultTime) {
+						// there is no old date, but we want to set the newly chosen one to the default time
+						var oldDate = new moment(this.defaultTime, 'HH:mm');
+						var hours = moment(oldDate).format('HH');
+						var minutes = moment(oldDate).format('mm');
+						newDate.setHours(hours, minutes);
 					}
 					this.date = newDate;
 
