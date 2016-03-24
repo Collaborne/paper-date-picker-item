@@ -10,89 +10,89 @@ var Polymer = Polymer || {};
  * @polymerBehavior Polymer.PaperDatePickerItemBehavior
  */
 Polymer.PaperDatePickerItemBehavior = {
-    properties: {
-    	/**
-    	 * Date reflected by the component
-    	 */
-        date: {
-            type: Date,
-            value: null,
-            notify: true
-        },
+	properties: {
+		/**
+		* Date reflected by the component
+		*/
+		date: {
+			type: Date,
+			value: null,
+			notify: true
+		},
 
-        /**
-         * Text shown when no date is set. Use this property to localize the element.
-         */
-        placeholder: {
-            type: String,
-            value: 'Add a date'
-        },
+		/**
+		* Text shown when no date is set. Use this property to localize the element.
+		*/
+		placeholder: {
+			type: String,
+			value: 'Add a date'
+		},
 
-        /**
-         * Text for the cancel button in the edit dialog. Use this property to localize the element.
-         */
-        cancelButton: {
-            type: String,
-            value: 'Cancel'
-        },
+		/**
+		* Text for the cancel button in the edit dialog. Use this property to localize the element.
+		*/
+		cancelButton: {
+			type: String,
+			value: 'Cancel'
+		},
 
-        /**
-        * Text for the OK button in the edit dialog. Use this property to localize the element.
-         */
-        okButton: {
-            type: String,
-            value: 'OK'
-        }
-    },
+		/**
+		* Text for the OK button in the edit dialog. Use this property to localize the element.
+		*/
+		okButton: {
+			type: String,
+			value: 'OK'
+		}
+	},
 
-    _edit: function(dialogId) {
-        var dialog = document.createElement(dialogId);
+	_edit: function(dialogId) {
+		var dialog = document.createElement(dialogId);
 
-        // Wait until dialog is created before the properties can be set
-        // @see http://stackoverflow.com/a/31482376
-        this.async(function() {
-            // Initialize dialog with the current date (default to today to avoid exception)
-            if (!this.date) {
-                dialog.date = new Date();
-            } else {
-                dialog.date = moment(this.date).toDate();
-            }
+		// Wait until dialog is created before the properties can be set
+		// @see http://stackoverflow.com/a/31482376
+		this.async(function() {
+			// Initialize dialog with the current date (default to today to avoid exception)
+			if (!this.date) {
+				dialog.date = new Date();
+			} else {
+				dialog.date = moment(this.date).toDate();
+			}
 
-            // Localize text
-            dialog.cancelButton = this.cancelButton;
-            dialog.okButton = this.okButton;
+			// Localize text
+			dialog.cancelButton = this.cancelButton;
+			dialog.okButton = this.okButton;
 
-            // Capture date if the user saved the dialog
-            dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
-                this._changeDate(e.detail);
-            }.bind(this));
+			// Capture date if the user saved the dialog
+			dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
+				this._changeDate(e.detail);
+			}.bind(this));
 
-            dialog.open();
-        }.bind(this));
+			dialog.open();
+		}.bind(this));
 
-        // Return dialog for unit testing
-        return dialog;
-    },
-    _changeDate: function(date) {
-        this.date = date;
-        // Inform listener of "change" events when the date was changed
-        this.fire('change', { value: this.date });
-    },
+		// Return dialog for unit testing
+		return dialog;
+	},
+	_changeDate: function(date) {
+		this.date = date;
+		// Inform listener of "change" events when the date was changed
+		this.fire('change', { value: this.date });
+	},
 
-    // Format date
-    _getFormattedDate: function(date, placeholder) {
-        if (!date) {
-            return placeholder;
-        }
-        // Use momentjs.com library to format the date
-        return moment(date).format('ll');
-    },
-    // Format time
-    _getFormattedTime: function(date) {
-        if (!date) {
-            return '';
-        }
-        return moment(date).format('LT');
-    }
+	// Format date
+	_getFormattedDate: function(date, placeholder) {
+		if (!date) {
+			return placeholder;
+		}
+		// Use momentjs.com library to format the date
+		return moment(date).format('ll');
+	},
+	// Format time
+	_getFormattedTime: function(date) {
+		if (!date) {
+			return '';
+		}
+		return moment(date).format('LT');
+	}
 };
 </script>
