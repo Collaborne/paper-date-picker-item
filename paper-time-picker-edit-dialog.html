@@ -36,26 +36,26 @@
 				notify: true
 			},
 
-	        /**
-	         * Text for the cancel button in the edit dialog. Use this property to localize the element.
-	         */
-	        cancelButton: {
-	            type: String,
-	            value: 'Cancel'
-	        },
+			/**
+			 * Text for the cancel button in the edit dialog. Use this property to localize the element.
+			 */
+			cancelButton: {
+				type: String,
+				value: 'Cancel'
+			},
 
-	        /**
-	        * Text for the OK button in the edit dialog. Use this property to localize the element.
-	         */
-	        okButton: {
-	            type: String,
-	            value: 'OK'
-	        }
+			/**
+			 * Text for the OK button in the edit dialog. Use this property to localize the element.
+			 */
+			okButton: {
+				type: String,
+				value: 'OK'
+			}
 		},
 
 		/**
-		* Open modal dialog containing the time picker
-		*/
+		 * Open modal dialog containing the time picker
+		 */
 		open: function() {
 			// Append dialog to the body. This ensures that the dialog claims the full screen instead of being positioned next to the <paper-datetime-picker-item>
 			Polymer.dom(document.body).appendChild(this);
