@@ -5,7 +5,12 @@
 <link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../paper-item/paper-item-body.html">
 <link rel="import" href="../paper-ripple/paper-ripple.html">
-<link rel="import" href="../paper-styles/paper-styles.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../paper-styles/color.html">
+<link rel="import" href="../paper-styles/default-theme.html">
+<link rel="import" href="../paper-styles/shadow.html">
+<link rel="import" href="../paper-styles/typography.html">
 <link rel="import" href="paper-date-picker-edit-dialog.html">
 <link rel="import" href="paper-time-picker-edit-dialog.html">
 <link rel="import" href="paper-date-picker-behaviors.html">
@@ -39,12 +44,12 @@
 
 	<template>
 		<paper-icon-item on-tap="_editDate" class="flex item" has-no-date$="[[_hasNoDate]]">
-			<paper-ripple fit></paper-ripple>
+			<paper-ripple class="fit"></paper-ripple>
 			<iron-icon icon="[[icon]]" item-icon class="icon"></iron-icon>
 			<paper-item-body class="text">[[_formattedDate]]</paper-item-body>
 		</paper-icon-item>
 		<paper-item class="flex" on-tap="_editTime" hidden="[[_hasNoDate]]">
-			<paper-ripple fit></paper-ripple>
+			<paper-ripple class="fit"></paper-ripple>
 			[[_formattedTime]]
 		</paper-item>
 	</template>
