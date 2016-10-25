@@ -10,7 +10,6 @@ cache:
 before_script:
 - npm install web-component-tester bower polylint
 - bower install
-- polylint
 - export PATH=$PWD/node_modules/.bin:$PATH
 script:
 - xvfb-run wct
