@@ -72,6 +72,8 @@ Polymer.PaperDatePickerItemBehavior = {
 			dialog.cancelButton = this.cancelButton;
 			dialog.okButton = this.okButton;
 
+			dialog.locale = this.locale;
+
 			// Capture date if the user saved the dialog
 			dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
 				this._changeDate(e.detail);
