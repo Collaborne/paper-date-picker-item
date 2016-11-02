@@ -72,7 +72,7 @@
 			_formattedTime: {
 				type: String,
 				value: '',
-				computed: '_getFormattedTime(date)'
+				computed: '_getFormattedTime(date, locale)'
 			},
 			_hasNoDate: {
 				type: Boolean,
@@ -87,8 +87,8 @@
 
 		// Trigger calculation of _formattedDate also if date is undefined
 		observers: [
-			'_onChangedPlaceholder(placeholder)',
-			'_onChangedDate(date)'
+			'_onChangedPlaceholder(placeholder, locale)',
+			'_onChangedDate(date, locale)'
 		],
 
 		// Private methods
@@ -104,6 +104,8 @@
 				// Localize text
 				dialog.cancelButton = this.cancelButton;
 	            dialog.okButton = this.okButton;
+
+				dialog.locale = this.locale;
 
 				// Capture date if the user saved the dialog
 				dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
@@ -135,11 +137,11 @@
 			// Return dialog for unit testing
 	        return dialog;
 		},
-		_onChangedPlaceholder: function(placeholder) {
-			this._formattedDate = this._getFormattedDate(this.date, placeholder);
+		_onChangedPlaceholder: function(placeholder, locale) {
+			this._formattedDate = this._getFormattedDate(this.date, placeholder, locale);
 		},
-		_onChangedDate: function(date) {
-			this._formattedDate = this._getFormattedDate(date, this.placeholder);
+		_onChangedDate: function(date, locale) {
+			this._formattedDate = this._getFormattedDate(date, this.placeholder, locale);
 		},
 
 		// Time related private methods

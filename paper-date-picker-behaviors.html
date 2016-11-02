@@ -46,6 +46,16 @@ Polymer.PaperDatePickerItemBehavior = {
 		okButton: {
 			type: String,
 			value: 'OK'
+		},
+
+		/**
+		 * The locale used for date and time formatting.
+		 */
+		locale: {
+			type: String,
+			value: function() {
+				return moment.locale();
+			}
 		}
 	},
 
@@ -56,7 +66,7 @@ Polymer.PaperDatePickerItemBehavior = {
 		// @see http://stackoverflow.com/a/31482376
 		this.async(function() {
 			// Initialize dialog with the current date (default to today to avoid exception)
-			dialog.date = this.date? moment(this.date).toDate() : new Date();
+			dialog.date = this.date ? moment(this.date).toDate() : new Date();
 
 			// Localize text
 			dialog.cancelButton = this.cancelButton;
@@ -80,19 +90,18 @@ Polymer.PaperDatePickerItemBehavior = {
 	},
 
 	// Format date
-	_getFormattedDate: function(date, placeholder) {
+	_getFormattedDate: function(date, placeholder, locale) {
 		if (!date) {
 			return placeholder;
 		}
-		// Use momentjs.com library to format the date
-		return moment(date).format('ll');
+		return moment(date).locale(locale).format('ll');
 	},
 	// Format time
-	_getFormattedTime: function(date) {
+	_getFormattedTime: function(date, locale) {
 		if (!date) {
 			return '';
 		}
-		return moment(date).format('LT');
+		return moment(date).locale(locale).format('LT');
 	}
 };
 </script>

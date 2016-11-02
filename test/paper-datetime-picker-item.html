@@ -46,7 +46,7 @@
 						element = fixture('TrivialDateTimePickerElement');
 					});
 					test('changes placeholder', function(done) {
-						element._onChangedPlaceholder('placeholder');
+						element._onChangedPlaceholder('placeholder', 'en');
 						expect(element._formattedDate).to.be.eql('placeholder');
 						done();
 					});
@@ -59,7 +59,7 @@
 					});
 					test('changes date', function(done) {
 						var newDate = new Date();
-						element._onChangedDate(newDate);
+						element._onChangedDate(newDate, 'en');
 						expect(element._formattedDate).to.be.eql(moment(newDate).format('ll'));
 						done();
 					});

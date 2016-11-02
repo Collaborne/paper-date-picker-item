@@ -3,14 +3,39 @@
 	<head>
 	    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 		<link rel="import" href="../../iron-icons/iron-icons.html">
+		<link rel="import" href="../../paper-dropdown-menu/paper-dropdown-menu.html">
+		<link rel="import" href="../../paper-item/paper-item.html">
+		<link rel="import" href="../../paper-listbox/paper-listbox.html">
 		<link rel="import" href="../paper-date-picker-item.html">
 		<link rel="import" href="../paper-datetime-picker-item.html">
+
+		<script src="../../moment/min/locales.min.js"></script>
+
 		<title>Demo</title>
 	</head>
 
 	<body>
-		<paper-date-picker-item icon="icons:today"></paper-date-picker-item>
-		<paper-datetime-picker-item icon="icons:today" placeholder="Add date and time"></paper-datetime-picker-item>
-		<paper-datetime-picker-item icon="icons:today" placeholder="Add date, time defaults to 9AM" default-time="09:00"></paper-datetime-picker-item>
+		<template is="dom-bind">
+			<paper-date-picker-item icon="icons:today" locale="[[locale]]"></paper-date-picker-item>
+			<paper-datetime-picker-item icon="icons:today" placeholder="Add date and time" locale="[[locale]]"></paper-datetime-picker-item>
+			<paper-datetime-picker-item icon="icons:today" placeholder="Add date, time defaults to 9AM" default-time="09:00" locale="[[locale]]"></paper-datetime-picker-item>
+
+			<paper-dropdown-menu label="Locale">
+				<paper-listbox class="dropdown-content" attr-for-selected="label" selected="[[locale]]" on-iron-select="setLocale">
+					<template is="dom-repeat" items="[[locales]]" as="locale">
+						<paper-item label="[[locale]]">[[locale]]</paper-item>
+					</template>
+				</paper-listbox>
+			</paper-dropdown-menu>
+		</template>
+
+		<script>
+			var scope = document.querySelector("template[is=dom-bind]");
+			scope.locales = moment.locales();
+			scope.locale = moment.locale();
+			scope.setLocale = function(e) {
+				scope.locale = e.detail.item.label;
+			}
+		</script>
 	</body>
 </html>

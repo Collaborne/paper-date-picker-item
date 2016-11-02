@@ -14,7 +14,7 @@
 		<style include="paper-time-picker-dialog-style"></style>
 
 		<paper-dialog id="dialog" class="paper-time-picker-dialog" modal on-iron-overlay-closed="_onClosed">
-			<paper-time-picker id="timePicker" time="[[_extractTime(date)]]"></paper-time-picker>
+			<paper-time-picker id="timePicker" time="[[_extractTime(date)]]" locale="[[locale]]"></paper-time-picker>
 			<div class="buttons">
 				<paper-button dialog-dismiss>[[cancelButton]]</paper-button>
 				<paper-button dialog-confirm on-tap="_save">[[okButton]]</paper-button>
@@ -50,7 +50,12 @@
 			okButton: {
 				type: String,
 				value: 'OK'
-			}
+			},
+
+			/**
+			 * Locale used for formatting times
+			 */
+			locale: String,
 		},
 
 		/**
