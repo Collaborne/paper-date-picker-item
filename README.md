@@ -27,6 +27,8 @@ load the locales explicitly.
 <script src="bower_components/moment/min/locales.js"></script>
 ~~~~
 
+The `paper-date-picker-item` components all provide a `locale` property to set the property used by the component.
+
 ## License
 
     This software is licensed under the Apache 2 license, quoted below.
