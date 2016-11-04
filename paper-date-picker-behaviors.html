@@ -25,6 +25,22 @@ Polymer.PaperDatePickerItemBehavior = {
 		defaultTime: String,
 
 		/**
+		 * Format to use for the date, adhering to momentjs.com display formats.
+		 */
+		dateFormat: {
+			type: String,
+			value: 'll'
+		},
+
+		/**
+		 * Format to use for time, adhering to momentjs.com display formats.
+		 */
+		timeFormat: {
+			type: String,
+			value: 'LT'
+		},
+
+		/**
 		 * Text shown when no date is set. Use this property to localize the element.
 		 */
 		placeholder: {
@@ -96,14 +112,14 @@ Polymer.PaperDatePickerItemBehavior = {
 		if (!date) {
 			return placeholder;
 		}
-		return moment(date).locale(locale).format('ll');
+		return moment(date).locale(locale).format(this.dateFormat);
 	},
 	// Format time
 	_getFormattedTime: function(date, locale) {
 		if (!date) {
 			return '';
 		}
-		return moment(date).locale(locale).format('LT');
+		return moment(date).locale(locale).format(this.timeFormat);
 	}
 };
 </script>

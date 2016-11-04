@@ -63,6 +63,33 @@
 						expect(element._formattedDate).to.be.eql(moment(newDate).format('ll'));
 						done();
 					});
+					test('changes date custom date format', function(done) {
+						element.dateFormat = 'DD/MM/YYYY';
+						var newDate = new Date();
+						element._onChangedDate(newDate, 'en');
+						expect(element._formattedDate).to.be.eql(moment(newDate).format(element.dateFormat));
+						done();
+					});
+				});
+				suite('compute formatted time', function() {
+					var element;
+
+					setup(function() {
+						element = fixture('TrivialDateTimePickerElement');
+					});
+					test('compute time', function(done) {
+						var newDate = new Date();
+						element.date = newDate;
+						expect(element._formattedTime).to.be.eql(moment(newDate).format('LT'));
+						done();
+					});
+					test('compute time custom time format', function(done) {
+						element.timeFormat = 'h:mm:ss a';
+						var newDate = new Date();
+						element.date = newDate;
+						expect(element._formattedTime).to.be.eql(moment(newDate).format(element.timeFormat));
+						done();
+					});
 				});
 				suite('check date', function() {
 					var element;
