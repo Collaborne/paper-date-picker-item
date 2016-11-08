@@ -16,6 +16,7 @@ before_install:
 before_script:
 - npm install web-component-tester bower polylint
 - bower install
+- polylint --no-recursion
 - export PATH=$PWD/node_modules/.bin:$PATH
 script:
 - JAVA_HOME=/usr/lib/jvm/java-8-oracle PATH=/usr/lib/jvm/java-8-oracle/bin:$PATH xvfb-run wct
