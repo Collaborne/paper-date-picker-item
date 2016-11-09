@@ -28,21 +28,21 @@
 -->
 <dom-module id="paper-datetime-picker-item">
 
-	<style>
-		:host {
-			@apply(--layout-horizontal);
-		}
-
-		.icon {
-			color: var(--disabled-text-color);
-		}
-
-		.item[has-no-date] .text {
-			color: var(--secondary-text-color);
-		}
-	</style>
-
 	<template>
+		<style>
+			:host {
+				@apply(--layout-horizontal);
+			}
+
+			.icon {
+				color: var(--disabled-text-color);
+			}
+
+			.item[has-no-date] .text {
+				color: var(--secondary-text-color);
+			}
+		</style>
+
 		<paper-icon-item on-tap="_editDate" class="flex item" has-no-date$="[[_hasNoDate]]">
 			<paper-ripple class="fit"></paper-ripple>
 			<iron-icon icon="[[icon]]" item-icon class="icon"></iron-icon>
