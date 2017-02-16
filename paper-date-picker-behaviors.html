@@ -1,6 +1,7 @@
 <!doctype html>
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../moment-element/moment-import.html">
+<link rel="import" href="../iron-behaviors/iron-control-state.html">
 <script>
 var Polymer = Polymer || {};
 /**
@@ -8,7 +9,7 @@ var Polymer = Polymer || {};
  *
  * @polymerBehavior Polymer.PaperDatePickerItemBehavior
  */
-Polymer.PaperDatePickerItemBehavior = {
+Polymer.PaperDatePickerItemBehaviorImpl = {
 	properties: {
 		/**
 		 * Date reflected by the component
@@ -122,4 +123,8 @@ Polymer.PaperDatePickerItemBehavior = {
 		return moment(date).locale(locale).format(this.timeFormat);
 	}
 };
+/** @polymerBehavior */
+Polymer.PaperDatePickerItemBehavior = [
+    PaperDatePickerItemBehaviorImpl, Polymer.IronControlState
+];
 </script>

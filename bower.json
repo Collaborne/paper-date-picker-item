@@ -30,7 +30,8 @@
     "neon-animation": "PolymerElements/neon-animation#^1.0.0",
     "paper-date-picker": "bendavis78/paper-date-picker#^1.2.0",
     "paper-time-picker": "bendavis78/paper-time-picker#^1.1.4",
-    "moment-element": "bendavis78/moment-element#^1.1.1"
+    "moment-element": "bendavis78/moment-element#^1.1.1",
+    "iron-behaviors": "PolymerElements/iron-behaviors#^1.0.17"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
