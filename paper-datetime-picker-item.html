@@ -34,6 +34,10 @@
 				@apply(--layout-horizontal);
 			}
 
+			:host[disabled] .text{
+				color: var(--disabled-text-color);
+			}
+
 			.icon {
 				color: var(--disabled-text-color);
 			}
@@ -48,7 +52,7 @@
 			<iron-icon icon="[[icon]]" item-icon class="icon"></iron-icon>
 			<paper-item-body class="text">[[_formattedDate]]</paper-item-body>
 		</paper-icon-item>
-		<paper-item class="flex" on-tap="_editTime" hidden="[[_hasNoDate]]">
+		<paper-item class="flex text" on-tap="_editTime" hidden="[[_hasNoDate]]">
 			<paper-ripple class="fit"></paper-ripple>
 			[[_formattedTime]]
 		</paper-item>
