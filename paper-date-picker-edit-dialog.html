@@ -13,7 +13,7 @@
 		<style include="paper-date-picker-dialog-style"></style>
 
 		<paper-dialog id="dialog" class="paper-date-picker-dialog" modal on-iron-overlay-closed="_onClosed">
-			<paper-date-picker id="datePicker" date="{{date}}" force-narrow locale="[[locale]]"></paper-date-picker>
+			<paper-date-picker id="datePicker" date="{{date}}" force-narrow locale="[[locale]]" min-date="[[minDate]]" max-date="[[maxDate]]"></paper-date-picker>
 			<div class="buttons">
 				<paper-button dialog-dismiss>[[cancelButton]]</paper-button>
 				<paper-button dialog-confirm on-tap="_save">[[okButton]]</paper-button>
@@ -55,6 +55,16 @@
 			 * Locale used for formatting dates
 			 */
 			locale: String,
+
+			/**
+			 * The minimum allowed date
+			 */
+			minDate: Date,
+
+			/**
+			 * The maximum allowed date
+			 */
+			maxDate: Date
 		},
 
 		/**
