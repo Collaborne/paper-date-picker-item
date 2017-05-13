@@ -73,7 +73,17 @@ Polymer.PaperDatePickerItemBehaviorImpl = {
 			value: function() {
 				return moment.locale();
 			}
-		}
+		},
+
+		/**
+		 * The minimum allowed date
+		 */
+		minDate: Date,
+
+		/**
+		 * The maximum allowed date
+		 */
+		maxDate: Date
 	},
 
 	_edit: function(dialogId) {
@@ -88,8 +98,10 @@ Polymer.PaperDatePickerItemBehaviorImpl = {
 			// Localize text
 			dialog.cancelButton = this.cancelButton;
 			dialog.okButton = this.okButton;
-
 			dialog.locale = this.locale;
+
+			dialog.minDate = this.minDate;
+			dialog.maxDate = this.maxDate;
 
 			// Capture date if the user saved the dialog
 			dialog.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
