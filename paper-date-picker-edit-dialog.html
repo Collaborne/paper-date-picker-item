@@ -10,7 +10,12 @@
 <dom-module id="paper-date-picker-edit-dialog">
 
 	<template>
-		<style include="paper-date-picker-dialog-style"></style>
+		<style include="paper-date-picker-dialog-style">
+			paper-date-picker {
+				padding: 0;
+				margin: 0;
+			}
+		</style>
 
 		<paper-dialog id="dialog" class="paper-date-picker-dialog" modal on-iron-overlay-closed="_onClosed">
 			<paper-date-picker id="datePicker" date="{{date}}" force-narrow locale="[[locale]]" min-date="[[minDate]]" max-date="[[maxDate]]"></paper-date-picker>

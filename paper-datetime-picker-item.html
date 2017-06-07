@@ -1,12 +1,12 @@
 <!doctype html>
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../paper-item/paper-icon-item.html">
 <link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../paper-item/paper-item-body.html">
 <link rel="import" href="../paper-ripple/paper-ripple.html">
-<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../paper-styles/color.html">
 <link rel="import" href="../paper-styles/default-theme.html">
 <link rel="import" href="../paper-styles/shadow.html">
@@ -29,12 +29,13 @@
 <dom-module id="paper-datetime-picker-item">
 
 	<template>
-		<style>
+		<style include="iron-flex">
 			:host {
-				@apply(--layout-horizontal);
+				@apply --layout-horizontal;
+				cursor: pointer;
 			}
 
-			:host[disabled] .text{
+			:host([disabled]) .text{
 				color: var(--disabled-text-color);
 			}
 
@@ -49,7 +50,7 @@
 
 		<paper-icon-item on-tap="_editDate" class="flex item" has-no-date$="[[_hasNoDate]]">
 			<paper-ripple class="fit"></paper-ripple>
-			<iron-icon icon="[[icon]]" item-icon class="icon"></iron-icon>
+			<iron-icon icon="[[icon]]" item-icon slot="item-icon" class="icon"></iron-icon>
 			<paper-item-body class="text">[[_formattedDate]]</paper-item-body>
 		</paper-icon-item>
 		<paper-item class="flex text" on-tap="_editTime" hidden="[[_hasNoDate]]">
