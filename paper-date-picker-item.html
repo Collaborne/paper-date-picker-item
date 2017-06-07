@@ -42,7 +42,7 @@
 
 		<paper-icon-item class="item" on-tap="_editDate" has-no-date$="[[!date]]">
 			<paper-ripple class="fit"></paper-ripple>
-			<iron-icon icon="[[icon]]" item-icon class="icon"></iron-icon>
+			<iron-icon icon="[[icon]]" slot="item-icon" item-icon class="icon"></iron-icon>
 			<paper-item-body class="text">[[_getFormattedDate(date, placeholder, locale)]]</paper-item-body>
 		</paper-icon-item>
 	</template>
