@@ -5,8 +5,6 @@ paper-date-picker-item [![Bower version](https://badge.fury.io/bo/paper-date-pic
 
 This component builds on the components [paper-date-picker](https://github.com/bendavis78/paper-date-picker) and [paper-time-picker](https://github.com/bendavis78/paper-time-picker)  by [Ben Davis](https://github.com/bendavis78).
 
-![Screenshot](/doc/screenshot.png "Screenshot")
-
 
 To use the elements:
 
@@ -22,7 +20,7 @@ To use the elements:
     <custom-style>
       <style is="custom-style">
         body {
-          min-height: 400px;
+          min-height: 600px;
         }
       </style>
     <custom-style>
