@@ -1,7 +1,4 @@
-_[Demo and API Docs](http://collaborne.github.io/paper-date-picker-item)_
-
-
-paper-date-picker-item [![Bower version](https://badge.fury.io/bo/paper-date-picker-item.svg)](http://badge.fury.io/bo/paper-date-picker-item) [![Travis state](https://travis-ci.org/Collaborne/paper-date-picker-item.svg?branch=master)](https://travis-ci.org/Collaborne/paper-date-picker-item)
+paper-date-picker-item [![Bower version](https://badge.fury.io/bo/paper-date-picker-item.svg)](http://badge.fury.io/bo/paper-date-picker-item) [![Travis state](https://travis-ci.org/Collaborne/paper-date-picker-item.svg?branch=master)](https://travis-ci.org/Collaborne/paper-date-picker-item) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/Collaborne/paper-date-picker-item)
 =========
 
 `paper-date-picker-item` provides a Material Design item that shows a date and opens a date picker dialog on tap. The web component is built with [Polymer 1.x](https://www.polymer-project.org).
@@ -15,6 +12,32 @@ To use the elements:
 
 `bower install paper-date-picker-item`
 
+<!--
+```
+<custom-element-demo>
+  <template>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../iron-icons/iron-icons.html">
+    <link rel="import" href="paper-datetime-picker-item.html">
+    <custom-style>
+      <style is="custom-style">
+        body {
+          min-height: 400px;
+        }
+      </style>
+    <custom-style>
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+<paper-datetime-picker-item
+    icon="icons:today"
+    placeholder="Add date and time"
+    date-format="Do, MMMM, YYYY">
+</paper-datetime-picker-item>
+```
 
 ## i18n Support
 
