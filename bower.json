@@ -40,5 +40,8 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0 || ^1.0.0",
     "paper-listbox": "PolymerElements/paper-listbox#1 - 2",
     "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#1 - 2"
+  },
+  "resolutions": {
+    "webcomponentsjs": "^v1.0.0"
   }
 }
