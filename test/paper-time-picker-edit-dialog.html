@@ -22,48 +22,50 @@
 		</test-fixture>
 
 		<script>
-			suite('<paper-time-picker-edit-dialog>', function() {
-				suite('save behavior', function() {
-					var element;
+			window.addEventListener('WebComponentsReady', function(e) {
+				suite('<paper-time-picker-edit-dialog>', function() {
+					suite('save behavior', function() {
+						var element;
 
-					setup(function() {
-						element = fixture('TrivialTimePickerElement');
+						setup(function() {
+							element = fixture('TrivialTimePickerElement');
+						});
+
+						test('fires save event with date on save', function(done) {
+							var date = new Date(2015, 1, 1, 0, 0, 0, 0);
+							element.date = date;
+							element.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
+								expect(e.detail).to.be.eql(date);
+								done();
+							});
+
+							element._save();
+						});
 					});
 
-					test('fires save event with date on save', function(done) {
-						var date = new Date(2015, 1, 1, 0, 0, 0, 0);
-						element.date = date;
-						element.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
-							expect(e.detail).to.be.eql(date);
+					suite('format date behavior', function() {
+						var element;
+
+						setup(function() {
+							element = fixture('TrivialTimePickerElement');
+						});
+
+						test('formats date as time', function(done) {
+							expect(element._extractTime(new Date(2015, 10, 17, 0, 0, 0, 0))).to.be.eql('12:00 AM');
 							done();
 						});
 
-						element._save();
-					});
-				});
+						test('formats date as current time if input is null', function(done) {
+							var now = moment(new Date()).format('LT');
+							expect(element._extractTime(null)).to.be.eql(now);
+							done();
+						});
 
-				suite('format date behavior', function() {
-					var element;
-
-					setup(function() {
-						element = fixture('TrivialTimePickerElement');
-					});
-
-					test('formats date as time', function(done) {
-						expect(element._extractTime(new Date(2015, 10, 17, 0, 0, 0, 0))).to.be.eql('12:00 AM');
-						done();
-					});
-
-					test('formats date as current time if input is null', function(done) {
-						var now = moment(new Date()).format('LT');
-						expect(element._extractTime(null)).to.be.eql(now);
-						done();
-					});
-
-					test('formats date as current time if input is undefined', function(done) {
-						var now = moment(new Date()).format('LT');
-						expect(element._extractTime(undefined)).to.be.eql(now);
-						done();
+						test('formats date as current time if input is undefined', function(done) {
+							var now = moment(new Date()).format('LT');
+							expect(element._extractTime(undefined)).to.be.eql(now);
+							done();
+						});
 					});
 				});
 			});

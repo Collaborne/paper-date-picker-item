@@ -21,93 +21,95 @@
 		</test-fixture>
 
 		<script>
-			suite('<paper-datetime-picker-item>', function() {
-				suite('components integration behavior', function() {
-					var element;
+			window.addEventListener('WebComponentsReady', function(e) {
+				suite('<paper-datetime-picker-item>', function() {
+					suite('components integration behavior', function() {
+						var element;
 
-					setup(function() {
-						element = fixture('TrivialDateTimePickerElement');
+						setup(function() {
+							element = fixture('TrivialDateTimePickerElement');
+						});
+						test('component triggers creation of a date picker dialog', function(done) {
+							// Still not possible to integrate in common behavior, due to issue with the date picker: https://github.com/bendavis78/paper-date-picker/issues/50
+							expect(element._editDate().tagName.toLowerCase()).to.be.eql('paper-date-picker-edit-dialog');
+							done();
+						});
+						test('component triggers creation of a time picker dialog', function(done) {
+							// Still not possible to integrate in common behavior, due to issue with the date picker: https://github.com/bendavis78/paper-date-picker/issues/50
+							expect(element._editTime().tagName.toLowerCase()).to.be.eql('paper-time-picker-edit-dialog');
+							done();
+						});
 					});
-					test('component triggers creation of a date picker dialog', function(done) {
-						// Still not possible to integrate in common behavior, due to issue with the date picker: https://github.com/bendavis78/paper-date-picker/issues/50
-						expect(element._editDate().tagName.toLowerCase()).to.be.eql('paper-date-picker-edit-dialog');
-						done();
-					});
-					test('component triggers creation of a time picker dialog', function(done) {
-						// Still not possible to integrate in common behavior, due to issue with the date picker: https://github.com/bendavis78/paper-date-picker/issues/50
-						expect(element._editTime().tagName.toLowerCase()).to.be.eql('paper-time-picker-edit-dialog');
-						done();
-					});
-				});
-				suite('change placeholder behavior', function() {
-					var element;
+					suite('change placeholder behavior', function() {
+						var element;
 
-					setup(function() {
-						element = fixture('TrivialDateTimePickerElement');
+						setup(function() {
+							element = fixture('TrivialDateTimePickerElement');
+						});
+						test('changes placeholder', function(done) {
+							element._onChangedPlaceholder('placeholder', 'en');
+							expect(element._formattedDate).to.be.eql('placeholder');
+							done();
+						});
 					});
-					test('changes placeholder', function(done) {
-						element._onChangedPlaceholder('placeholder', 'en');
-						expect(element._formattedDate).to.be.eql('placeholder');
-						done();
-					});
-				});
-				suite('change date behavior', function() {
-					var element;
+					suite('change date behavior', function() {
+						var element;
 
-					setup(function() {
-						element = fixture('TrivialDateTimePickerElement');
+						setup(function() {
+							element = fixture('TrivialDateTimePickerElement');
+						});
+						test('changes date', function(done) {
+							var newDate = new Date();
+							element._onChangedDate(newDate, 'en');
+							expect(element._formattedDate).to.be.eql(moment(newDate).format('ll'));
+							done();
+						});
+						test('changes date custom date format', function(done) {
+							element.dateFormat = 'DD/MM/YYYY';
+							var newDate = new Date();
+							element._onChangedDate(newDate, 'en');
+							expect(element._formattedDate).to.be.eql(moment(newDate).format(element.dateFormat));
+							done();
+						});
 					});
-					test('changes date', function(done) {
-						var newDate = new Date();
-						element._onChangedDate(newDate, 'en');
-						expect(element._formattedDate).to.be.eql(moment(newDate).format('ll'));
-						done();
-					});
-					test('changes date custom date format', function(done) {
-						element.dateFormat = 'DD/MM/YYYY';
-						var newDate = new Date();
-						element._onChangedDate(newDate, 'en');
-						expect(element._formattedDate).to.be.eql(moment(newDate).format(element.dateFormat));
-						done();
-					});
-				});
-				suite('compute formatted time', function() {
-					var element;
+					suite('compute formatted time', function() {
+						var element;
 
-					setup(function() {
-						element = fixture('TrivialDateTimePickerElement');
+						setup(function() {
+							element = fixture('TrivialDateTimePickerElement');
+						});
+						test('compute time', function(done) {
+							var newDate = new Date();
+							element.date = newDate;
+							expect(element._formattedTime).to.be.eql(moment(newDate).format('LT'));
+							done();
+						});
+						test('compute time custom time format', function(done) {
+							element.timeFormat = 'h:mm:ss a';
+							var newDate = new Date();
+							element.date = newDate;
+							expect(element._formattedTime).to.be.eql(moment(newDate).format(element.timeFormat));
+							done();
+						});
 					});
-					test('compute time', function(done) {
-						var newDate = new Date();
-						element.date = newDate;
-						expect(element._formattedTime).to.be.eql(moment(newDate).format('LT'));
-						done();
-					});
-					test('compute time custom time format', function(done) {
-						element.timeFormat = 'h:mm:ss a';
-						var newDate = new Date();
-						element.date = newDate;
-						expect(element._formattedTime).to.be.eql(moment(newDate).format(element.timeFormat));
-						done();
-					});
-				});
-				suite('check date', function() {
-					var element;
+					suite('check date', function() {
+						var element;
 
-					setup(function() {
-						element = fixture('TrivialDateTimePickerElement');
-					});
-					test('returns true if date is undefined', function(done) {
-						expect(element._computeHasNoDate(undefined)).to.be.true;
-						done();
-					});
-					test('returns true if date is undefined', function(done) {
-						expect(element._computeHasNoDate(undefined)).to.be.true;
-						done();
-					});
-					test('returns false if date is valid', function(done) {
-						expect(element._computeHasNoDate(new Date())).to.be.false;
-						done();
+						setup(function() {
+							element = fixture('TrivialDateTimePickerElement');
+						});
+						test('returns true if date is undefined', function(done) {
+							expect(element._computeHasNoDate(undefined)).to.be.true;
+							done();
+						});
+						test('returns true if date is undefined', function(done) {
+							expect(element._computeHasNoDate(undefined)).to.be.true;
+							done();
+						});
+						test('returns false if date is valid', function(done) {
+							expect(element._computeHasNoDate(new Date())).to.be.false;
+							done();
+						});
 					});
 				});
 			});

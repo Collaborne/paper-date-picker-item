@@ -22,23 +22,25 @@
 		</test-fixture>
 
 		<script>
-			suite('<paper-date-picker-edit-dialog>', function() {
-				suite('save behavior', function() {
-					var element;
+			window.addEventListener('WebComponentsReady', function(e) {
+				suite('<paper-date-picker-edit-dialog>', function() {
+					suite('save behavior', function() {
+						var element;
 
-					setup(function() {
-						element = fixture('TrivialEmailElement');
-					});
-
-					test('fires save event with date on save', function(done) {
-						var date = new Date(2015, 1, 1, 0, 0, 0, 0);
-						element.date = date;
-						element.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
-							expect(e.detail).to.be.eql(date);
-							done();
+						setup(function() {
+							element = fixture('TrivialEmailElement');
 						});
 
-						element._save();
+						test('fires save event with date on save', function(done) {
+							var date = new Date(2015, 1, 1, 0, 0, 0, 0);
+							element.date = date;
+							element.addEventListener('paper-date-picker-edit-dialog-save', function(e) {
+								expect(e.detail).to.be.eql(date);
+								done();
+							});
+
+							element._save();
+						});
 					});
 				});
 			});

@@ -21,17 +21,19 @@
 		</test-fixture>
 
 		<script>
-			suite('<paper-date-picker-item>', function() {
-				suite('components integration behavior', function() {
-					var element;
+			window.addEventListener('WebComponentsReady', function(e) {
+				suite('<paper-date-picker-item>', function() {
+					suite('components integration behavior', function() {
+						var element;
 
-					setup(function() {
-						element = fixture('TrivialDatePickerElement');
-					});
+						setup(function() {
+							element = fixture('TrivialDatePickerElement');
+						});
 
-					test('component triggers creation of a date picker dialog', function(done) {
-						expect(element._editDate().tagName.toLowerCase()).to.be.eql('paper-date-picker-edit-dialog');
-						done();
+						test('component triggers creation of a date picker dialog', function(done) {
+							expect(element._editDate().tagName.toLowerCase()).to.be.eql('paper-date-picker-edit-dialog');
+							done();
+						});
 					});
 				});
 			});
