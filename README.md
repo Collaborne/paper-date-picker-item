@@ -1,3 +1,5 @@
+**This repository is no longer actively maintained! We decided to use instead [`<app-datepicker>`](https://github.com/motss/app-datepicker) because it provides good Polymer 2.0 support.**
+
 paper-date-picker-item [![Bower version](https://badge.fury.io/bo/paper-date-picker-item.svg)](http://badge.fury.io/bo/paper-date-picker-item) [![Travis state](https://travis-ci.org/Collaborne/paper-date-picker-item.svg?branch=master)](https://travis-ci.org/Collaborne/paper-date-picker-item) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/Collaborne/paper-date-picker-item)
 =========
 
