@@ -1,6 +1,7 @@
 **This repository is no longer actively maintained! We decided to use instead [`<app-datepicker>`](https://github.com/motss/app-datepicker) because it provides good Polymer 2.0 support.**
 
-paper-date-picker-item [![Bower version](https://badge.fury.io/bo/paper-date-picker-item.svg)](http://badge.fury.io/bo/paper-date-picker-item) [![Travis state](https://travis-ci.org/Collaborne/paper-date-picker-item.svg?branch=master)](https://travis-ci.org/Collaborne/paper-date-picker-item) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/Collaborne/paper-date-picker-item)
+paper-date-picker-item [![Bower version](https://badge.fury.io/bo/paper-date-picker-item.svg)](http://badge.fury.io/bo/paper-date-picker-item) [![Travis state](https://travis-ci.org/Collaborne/paper-date-picker-item.svg?branch=master)](https://travis-ci.org/Collaborne/paper-date-picker-item) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/Collaborne/paper-date-picker-item)  
+[![Published on Vaadin  Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/Collabornepaper-date-picker-item)
 =========
 
 `paper-date-picker-item` provides a Material Design item that shows a date and opens a date picker dialog on tap. The web component is built with [Polymer 1.x](https://www.polymer-project.org).
